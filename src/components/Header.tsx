@@ -45,7 +45,7 @@ export function Header() {
               key={item.href}
               href={item.href}
               aria-current={isActive(item.href) ? "page" : undefined}
-              className={`rounded-full px-4 py-2 text-sm transition ${
+              className={`rounded-full px-3 py-2 text-sm transition xl:px-4 ${
                 isActive(item.href) ? "text-gold" : "text-muted hover:text-fg"
               }`}
             >
@@ -55,6 +55,9 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-2">
           <ThemeToggle />
+          <Link href="/login" className="hidden rounded-full px-3 py-2 text-sm text-muted transition hover:text-gold md:inline-flex">
+            الدخول
+          </Link>
           <Link href="/rfq" className="btn-primary hidden sm:inline-flex">
             اطلب عرض سعر
           </Link>
@@ -84,6 +87,9 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+          <Link href="/login" className="rounded-2xl px-4 py-4 font-display text-2xl text-muted">
+            الدخول للبوابات
+          </Link>
           <Link href="/rfq" className="btn-primary mt-6 py-4 text-base">
             اطلب عرض سعر
           </Link>

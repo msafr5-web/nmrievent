@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { estimate } from "@/lib/estimator";
 import { rfqSchema } from "@/lib/rfq";
 import { referenceNumber } from "@/lib/rfq-shared";
+import { mutate } from "@/server/db";
+import { notify } from "@/server/http";
 
 // حد بسيط للطلبات لكل IP (في الإنتاج يُستبدل بـ Redis كما في الوثيقة)
 const hits = new Map<string, { count: number; reset: number }>();
@@ -50,6 +52,12 @@ export async function POST(req: Request) {
   const reference = referenceNumber();
   const lead = { reference, receivedAt: new Date().toISOString(), estimate: est, ...data };
 
+  // حفظ الطلب في خط المبيعات (CRM) بمرحلة "طلب جديد"
+  const { consent: _c, company_site: _h, ...fields } = data;
+  void _c;
+  void _h;
+  await mutate((db) => void db.leads.unshift({ ...fields, reference, receivedAt: lead.receivedAt, stage: "new", estimate: est }));
+
   const webhook = process.env.RFQ_WEBHOOK_URL;
   if (webhook) {
     try {
@@ -57,9 +65,8 @@ export async function POST(req: Request) {
     } catch (err) {
       console.error("[rfq] webhook failed", err);
     }
-  } else {
-    console.info("[rfq] new lead", reference, data.organization, est.mid);
   }
+  await notify("rfq.received", { reference, organization: data.organization, email: data.email, phone: data.phone });
 
   return NextResponse.json({ reference, estimate: { low: est.low, high: est.high } }, { status: 201 });
 }

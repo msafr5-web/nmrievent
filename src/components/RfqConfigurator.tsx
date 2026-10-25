@@ -165,7 +165,7 @@ export function RfqConfigurator() {
           <a href={whatsappLink(site.whatsapp, msg)} target="_blank" rel="noopener noreferrer" className="btn bg-[#25D366] text-white hover:opacity-90">
             <WhatsAppIcon className="h-5 w-5" /> تابع طلبك عبر واتساب
           </a>
-          <Link href="/portfolio" className="btn-ghost">تصفح أعمالنا</Link>
+          <Link href="/login" className="btn-ghost">متابعة الطلب من بوابة العملاء</Link>
         </div>
       </div>
     );

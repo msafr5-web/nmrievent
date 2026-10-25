@@ -1,9 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans_Arabic, Reem_Kufi } from "next/font/google";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
+import { Analytics } from "@/components/Analytics";
 import { themeScript } from "@/components/ThemeToggle";
-import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { site } from "@/content/site";
 import "./globals.css";
 
@@ -63,10 +61,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       </head>
       <body>
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
-        <WhatsAppFab />
+        {children}
+        <Analytics />
       </body>
     </html>
   );

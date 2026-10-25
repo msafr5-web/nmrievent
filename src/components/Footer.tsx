@@ -19,6 +19,7 @@ export function Footer() {
             {nav.map((n) => (
               <li key={n.href}><Link className="hover:text-gold" href={n.href}>{n.label}</Link></li>
             ))}
+            <li><Link className="hover:text-gold" href="/login">بوابة العملاء والفرق</Link></li>
           </ul>
         </div>
         <div className="md:col-span-3">

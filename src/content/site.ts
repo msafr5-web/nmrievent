@@ -17,6 +17,7 @@ export const nav = [
   { href: "/portfolio", label: "أعمالنا" },
   { href: "/insights", label: "رؤى وأفكار" },
   { href: "/about", label: "من نحن" },
+  { href: "/join", label: "انضم للكوادر" },
   { href: "/contact", label: "تواصل" },
 ];
 
