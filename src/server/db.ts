@@ -9,7 +9,10 @@ import type { Db } from "./types";
  * مخزن بيانات بملف JSON لمرحلة النموذج الأولي.
  * الواجهة (read / mutate) مصممة لتُستبدل بـ PostgreSQL (انظر docs/schema.sql) دون تغيير الصفحات.
  */
-const DATA_DIR = process.env.DATA_DIR ?? path.join(process.cwd(), ".data");
+// Serverless hosts such as Vercel only allow writes under /tmp (ephemeral).
+const DATA_DIR =
+  process.env.DATA_DIR ??
+  (process.env.VERCEL ? path.join("/tmp", "nmrievent-data") : path.join(process.cwd(), ".data"));
 const FILE = path.join(DATA_DIR, "db.json");
 
 let cache: Db | null = null;
