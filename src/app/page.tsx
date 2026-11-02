@@ -1,10 +1,14 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Counter } from "@/components/Counter";
+import { ClientsShowcase } from "@/components/ClientsShowcase";
 import { CtaBand } from "@/components/CtaBand";
 import { ArrowIcon, serviceIcons } from "@/components/icons";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
+import { WorkMosaic } from "@/components/WorkMosaic";
+import { featuredGalleryIds, galleryByIds, siteImages } from "@/content/gallery";
 import { insights } from "@/content/insights";
 import { projects } from "@/content/projects";
 import { services } from "@/content/services";
@@ -18,7 +22,9 @@ export default function HomePage() {
       <ServicesGrid />
       <Journey />
       <FeaturedWork />
+      <FieldWork />
       <Audiences />
+      <ClientsShowcase />
       <LatestInsights />
       <div className="mt-24">
         <CtaBand />
@@ -32,6 +38,17 @@ function Hero() {
     <section className="relative isolate flex min-h-[100svh] items-end overflow-hidden pb-16 pt-32 md:items-center md:pb-0">
       {/* خلفية "ريل" متحركة خفيفة بدل الفيديو الثقيل؛ يمكن استبدالها بفيديو lazy */}
       <div className="absolute inset-0 -z-10" aria-hidden>
+        {/* صورة الهوية: تظهر في الطرف الخالي من النص وتتلاشى نحو النص؛ خافتة على الجوال للحفاظ على وضوح القراءة */}
+        <Image
+          src={siteImages["hero-riyadh"].src}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[20%_center] opacity-30 [mask-image:linear-gradient(to_right,black_0%,black_25%,transparent_68%)] md:opacity-90"
+        />
+        {/* يضمن وضوح الترويسة فوق الصورة في الوضعين */}
+        <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-bg/90 via-bg/50 to-transparent" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_20%,rgb(var(--gold)/.28),transparent_55%),radial-gradient(ellipse_at_10%_90%,rgb(var(--palm)/.30),transparent_50%)]" />
         <div className="sadu absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
         <svg className="absolute -end-40 top-1/2 h-[900px] w-[900px] -translate-y-1/2 animate-[spin_120s_linear_infinite] opacity-40" viewBox="0 0 400 400">
@@ -229,6 +246,21 @@ function LatestInsights() {
           </Reveal>
         ))}
       </div>
+    </section>
+  );
+}
+
+function FieldWork() {
+  const items = galleryByIds(featuredGalleryIds);
+  return (
+    <section className="container mt-28">
+      <SectionHeading
+        eyebrow="من الميدان"
+        title={<>لقطات من <span className="text-gold">تنفيذنا</span></>}
+        lead="أجنحة معارض وفرق ميدانية وطباعة كبيرة الحجم من مشاريع نفذناها فعليًا."
+        action={<Link href="/portfolio#gallery" className="btn-ghost">معرض الصور الكامل <ArrowIcon className="h-4 w-4" /></Link>}
+      />
+      <WorkMosaic items={items} />
     </section>
   );
 }

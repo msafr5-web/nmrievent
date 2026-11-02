@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { nav } from "@/content/site";
+import { nav, phones } from "@/content/site";
 import { Logo } from "./Logo";
 import { ThemeToggle } from "./ThemeToggle";
-import { CloseIcon, MenuIcon } from "./icons";
+import { CloseIcon, MenuIcon, PhoneIcon } from "./icons";
 
 export function Header() {
   const pathname = usePathname();
@@ -59,6 +59,9 @@ export function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
+          <a href={`tel:${phones[0].tel}`} dir="ltr" className="hidden items-center gap-2 rounded-full px-3 py-2 text-sm text-muted transition hover:text-gold xl:inline-flex" aria-label={`اتصل بنا على ${phones[0].display}`}>
+            <PhoneIcon className="h-4 w-4 text-gold" />{phones[0].display}
+          </a>
           <ThemeToggle />
           <Link href="/rfq" className="btn-primary hidden sm:inline-flex">
             اطلب عرض سعر
@@ -92,6 +95,13 @@ export function Header() {
           <Link href="/rfq" className="btn-primary mt-6 py-4 text-base">
             اطلب عرض سعر
           </Link>
+          <div className="mt-4 grid gap-2">
+            {phones.map((ph) => (
+              <a key={ph.tel} href={`tel:${ph.tel}`} dir="ltr" className="btn-ghost justify-center py-3 text-base">
+                <PhoneIcon className="h-5 w-5 text-gold" />{ph.display}
+              </a>
+            ))}
+          </div>
         </nav>
       </div>
     </header>

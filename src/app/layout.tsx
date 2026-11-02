@@ -32,8 +32,9 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: `${site.name} | ${site.tagline}`,
     description: site.description,
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "NMR Events — فعاليات استثنائية في الرياض" }],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: { card: "summary_large_image", images: ["/og.jpg"] },
   alternates: { canonical: "/" },
 };
 

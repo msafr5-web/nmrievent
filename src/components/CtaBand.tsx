@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowIcon } from "./icons";
+import { phones } from "@/content/site";
+import { ArrowIcon, PhoneIcon } from "./icons";
 
 export function CtaBand() {
   return (
@@ -16,9 +17,19 @@ export function CtaBand() {
               صمّم فعاليتك عبر المهيّئ الذكي واحصل على تقدير مبدئي فوري، ويتواصل معك مستشارنا خلال ساعتين.
             </p>
           </div>
-          <Link href="/rfq" className="btn-primary px-8 py-4 text-base">
-            ابدأ تهيئة فعاليتك <ArrowIcon className="h-5 w-5" />
-          </Link>
+          <div className="flex flex-col items-start gap-4 md:items-end">
+            <Link href="/rfq" className="btn-primary px-8 py-4 text-base">
+              ابدأ تهيئة فعاليتك <ArrowIcon className="h-5 w-5" />
+            </Link>
+            <p className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted">
+              <span>أو اتصل بنا مباشرة:</span>
+              {phones.map((ph) => (
+                <a key={ph.tel} href={`tel:${ph.tel}`} dir="ltr" className="inline-flex items-center gap-1.5 font-semibold text-fg hover:text-gold">
+                  <PhoneIcon className="h-4 w-4 text-gold" />{ph.display}
+                </a>
+              ))}
+            </p>
+          </div>
         </div>
       </div>
     </section>

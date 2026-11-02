@@ -5,11 +5,19 @@ export const site = {
   description:
     "منصة متكاملة لتصميم وإدارة الفعاليات والمؤتمرات والمعارض في المملكة العربية السعودية: إبداع فني، حلول رقمية تفاعلية، إدارة حشود ولوجستيات، وكوادر ميدانية مؤهلة.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://nmrievent.com",
-  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "966500000000",
-  email: "hello@nmrievent.com",
-  phone: "+966 50 000 0000",
+  /** رقم واتساب (دولي بدون +). الافتراضي: الرقم الأول من ملف تعريف الشركة */
+  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "966547047635",
+  email: "info@nmrevent.com",
+  /** الرقم الرئيسي (للبيانات المنظمة وJSON-LD) */
+  phone: "+966 54 704 7635",
   city: "الرياض، المملكة العربية السعودية",
 };
+
+/** أرقام التواصل المعتمدة من ملف تعريف الشركة */
+export const phones = [
+  { display: "+966 54 704 7635", tel: "+966547047635", wa: "966547047635" },
+  { display: "+966 53 534 0744", tel: "+966535340744", wa: "966535340744" },
+] as const;
 
 export const nav = [
   { href: "/", label: "الرئيسية" },

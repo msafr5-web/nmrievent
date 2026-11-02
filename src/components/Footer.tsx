@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { nav, site } from "@/content/site";
+import { nav, phones, site } from "@/content/site";
 import { services } from "@/content/services";
 import { Logo } from "./Logo";
 import { MailIcon, PhoneIcon, PinIcon } from "./icons";
@@ -34,7 +34,9 @@ export function Footer() {
           <ul className="space-y-3 text-sm text-muted">
             <li className="flex items-center gap-2"><PinIcon className="h-4 w-4 text-gold" />{site.city}</li>
             <li className="flex items-center gap-2"><MailIcon className="h-4 w-4 text-gold" /><a href={`mailto:${site.email}`} className="hover:text-gold">{site.email}</a></li>
-            <li className="flex items-center gap-2"><PhoneIcon className="h-4 w-4 text-gold" /><a href={`tel:${site.phone.replace(/\s/g, "")}`} dir="ltr" className="hover:text-gold">{site.phone}</a></li>
+            {phones.map((ph) => (
+              <li key={ph.tel} className="flex items-center gap-2"><PhoneIcon className="h-4 w-4 text-gold" /><a href={`tel:${ph.tel}`} dir="ltr" className="hover:text-gold">{ph.display}</a></li>
+            ))}
           </ul>
         </div>
       </div>

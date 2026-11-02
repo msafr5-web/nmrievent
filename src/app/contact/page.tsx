@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/icons";
 import { PageHero } from "@/components/PageHero";
-import { site } from "@/content/site";
+import { phones, site } from "@/content/site";
 import { whatsappLink } from "@/lib/rfq-shared";
 
 export const metadata: Metadata = {
@@ -12,10 +12,11 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  const channels = [
+  type Channel = { icon: typeof PhoneIcon; title: string; text: string; href: string; cta: string; external?: boolean; ltr?: boolean };
+  const channels: Channel[] = [
     { icon: WhatsAppIcon, title: "واتساب الأعمال", text: "أسرع طريقة للتواصل، ردّ خلال دقائق في أوقات العمل.", href: whatsappLink(site.whatsapp, "مرحبًا nmrievent"), cta: "ابدأ المحادثة", external: true },
     { icon: MailIcon, title: "البريد الإلكتروني", text: site.email, href: `mailto:${site.email}`, cta: "أرسل بريدًا" },
-    { icon: PhoneIcon, title: "الهاتف", text: site.phone, href: `tel:${site.phone.replace(/\s/g, "")}`, cta: "اتصل بنا" },
+    ...phones.map((ph, i) => ({ icon: PhoneIcon, title: i === 0 ? "الهاتف الرئيسي" : "هاتف إضافي", text: ph.display, href: `tel:${ph.tel}`, cta: "اتصل بنا", ltr: true })),
     { icon: PinIcon, title: "المقر الرئيسي", text: site.city, href: "https://maps.google.com/?q=Riyadh", cta: "الخريطة", external: true },
   ];
   return (
@@ -29,7 +30,7 @@ export default function ContactPage() {
             <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gold/10 text-gold"><c.icon className="h-7 w-7" /></span>
             <div>
               <h2 className="text-xl font-bold">{c.title}</h2>
-              <p className="mt-2 text-muted" dir="auto">{c.text}</p>
+              <p className={`mt-2 text-muted ${c.ltr ? "text-lg font-semibold text-fg" : ""}`} dir={c.ltr ? "ltr" : "auto"}>{c.text}</p>
               <span className="mt-4 inline-block text-sm font-semibold text-gold">{c.cta}</span>
             </div>
           </a>

@@ -5,6 +5,9 @@ import { CtaBand } from "@/components/CtaBand";
 import { CheckIcon, serviceIcons } from "@/components/icons";
 import { PageHero } from "@/components/PageHero";
 import { ProjectCard } from "@/components/ProjectCard";
+import { SectionHeading } from "@/components/SectionHeading";
+import { WorkMosaic } from "@/components/WorkMosaic";
+import { galleryByIds, serviceGalleryIds } from "@/content/gallery";
 import { projects } from "@/content/projects";
 import { getService, services } from "@/content/services";
 
@@ -21,6 +24,7 @@ export default async function ServicePage({ params }: Props) {
   const service = getService((await params).slug);
   if (!service) notFound();
   const Icon = serviceIcons[service.icon];
+  const photos = galleryByIds(serviceGalleryIds[service.slug] ?? []);
   const work = projects.filter((p) => p.services.includes(service.slug)).slice(0, 3);
 
   return (
@@ -52,6 +56,16 @@ export default async function ServicePage({ params }: Props) {
           </ul>
         </div>
       </section>
+      {photos.length > 0 && (
+        <section className="container mt-24">
+          <SectionHeading
+            eyebrow="من أعمالنا"
+            title={<>صور من <span className="text-gold">التنفيذ</span></>}
+            action={<Link href="/portfolio#gallery" className="btn-ghost">معرض الصور الكامل</Link>}
+          />
+          <WorkMosaic items={photos} columns={photos.length % 3 === 0 ? 3 : 2} />
+        </section>
+      )}
       {work.length > 0 && (
         <section className="container mt-24">
           <h2 className="mb-8 text-2xl font-bold">أعمال قدمنا فيها هذه الخدمة</h2>

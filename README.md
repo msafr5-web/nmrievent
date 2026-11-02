@@ -44,6 +44,19 @@ npm run dev                  # http://localhost:3000
 npm run build && npm start   # نسخة الإنتاج
 ```
 
+## الصور
+
+صور الموقع مستخرجة من ملف تعريف الشركة (Company Profile 2026) بدقتها الأصلية، ومحوَّلة إلى WebP (عرض أقصى 1600px):
+
+| المسار | المحتوى | أين تظهر |
+| --- | --- | --- |
+| `public/images/brand/` | الشعار الرسمي (PNG بخلفية شفافة) | الترويسة والتذييل |
+| `public/images/site/` | صورة الهوية، أفق الرياض، الصحراء، لوحتا الشركاء والعملاء | الرئيسية (Hero + شركاء النجاح) و«من نحن» |
+| `public/images/works/{booths,staff,crowd,printing,design3d,graphics}/` | 74 صورة أعمال مصنفة | `/portfolio#gallery` (فلترة + تكبير) والرئيسية وصفحات الخدمات |
+| `public/og.jpg` | صورة المشاركة الاجتماعية 1200×630 | OpenGraph / Twitter |
+
+الفهرس والنص البديل لكل صورة في `src/content/gallery.ts`؛ أضف صورة جديدة بوضع ملف WebP في المجلد المناسب وسطر في ذلك الملف.
+
 ## الاختبارات والجودة
 
 ```bash

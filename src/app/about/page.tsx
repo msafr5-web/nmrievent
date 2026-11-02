@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { CtaBand } from "@/components/CtaBand";
 import { PageHero } from "@/components/PageHero";
+import { siteImages } from "@/content/gallery";
 import { journey, stats } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -24,6 +26,14 @@ export default function AboutPage() {
         title={<>نجمع <span className="text-gold">الإبداع</span> و<span className="text-gold">التقنية</span> و<span className="text-gold">التشغيل</span> في فريق واحد</>}
         lead="وُلدت nmrievent من قناعة بسيطة: الفعالية الاستثنائية تحتاج شريكًا يفهم الفكرة الإبداعية، ويملك التقنية، ويقدر على تشغيل مئات الآلاف من الزوار بأمان."
       />
+      <section className="container mb-6 grid gap-4 md:grid-cols-2">
+        {([["about-skyline", "أفق الرياض عند الغروب من منصة فعالية بزخارف مضاءة", "من نحن"], ["vision-desert", "كثبان صحراء المملكة وقافلة إبل عند الغروب", "رؤيتنا"]] as const).map(([key, alt, label]) => (
+          <figure key={key} className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-line">
+            <Image src={siteImages[key].src} alt={alt} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
+            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-5 font-display text-xl text-white">{label}</figcaption>
+          </figure>
+        ))}
+      </section>
       <section className="container grid gap-6 md:grid-cols-2">
         {values.map((v) => (
           <div key={v.title} className="card p-8">
