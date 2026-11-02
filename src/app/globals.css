@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* الألوان كقيم RGB لتعمل مع شفافية Tailwind */
+:root {
+  --bg: 250 247 241;
+  --surface: 255 255 255;
+  --elevated: 243 238 228;
+  --fg: 22 24 29;
+  --muted: 98 96 92;
+  --line: 222 214 199;
+  --gold: 160 120 48;
+  --gold-soft: 214 184 120;
+  --palm: 31 92 74;
+  --clay: 166 82 52;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: 10 12 16;
+  --surface: 17 20 26;
+  --elevated: 25 29 37;
+  --fg: 241 236 226;
+  --muted: 160 154 143;
+  --line: 44 48 58;
+  --gold: 206 168 94;
+  --gold-soft: 232 207 150;
+  --palm: 84 160 132;
+  --clay: 214 122 86;
+  color-scheme: dark;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+  body { @apply bg-bg text-fg font-sans antialiased; text-rendering: optimizeLegibility; }
+  ::selection { background: rgb(var(--gold) / 0.3); }
+  :focus-visible { outline: 2px solid rgb(var(--gold)); outline-offset: 3px; border-radius: 6px; }
+  h1, h2, h3, h4 { @apply font-display; letter-spacing: 0; }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition
+      duration-300 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary { @apply btn bg-gold text-bg hover:bg-gold-soft; }
+  .btn-ghost { @apply btn border border-line text-fg hover:border-gold hover:text-gold; }
+  .eyebrow { @apply inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-gold; }
+  .eyebrow::before { content: ""; @apply h-px w-8 bg-gold; }
+  .card { @apply rounded-3xl border border-line bg-surface; }
+  .field {
+    @apply w-full rounded-2xl border border-line bg-surface px-4 py-3 text-fg placeholder:text-muted/70
+      transition focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20;
+  }
+  .label { @apply mb-2 block text-sm font-medium text-fg; }
+}
+
+@layer utilities {
+  /* نقش مستوحى من السدو */
+  .sadu {
+    background-image:
+      linear-gradient(45deg, rgb(var(--gold) / .08) 25%, transparent 25%),
+      linear-gradient(-45deg, rgb(var(--gold) / .08) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, rgb(var(--gold) / .08) 75%),
+      linear-gradient(-45deg, transparent 75%, rgb(var(--gold) / .08) 75%);
+    background-size: 28px 28px;
+    background-position: 0 0, 0 14px, 14px -14px, -14px 0;
+  }
+  .text-balance { text-wrap: balance; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
