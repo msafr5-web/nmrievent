@@ -1,0 +1,82 @@
+<%- include('partials/head', { title: title, path: path }) %>
+
+<section class="container-x pb-16 pt-14 sm:pt-24">
+  <p class="tag border border-gold-400/40 bg-gold-400/10 text-gold-300" data-i18n="hero.eyebrow">Vision 2030 · Expo 2030 Riyadh</p>
+  <h1 class="mt-5 max-w-3xl text-4xl font-black leading-tight text-white sm:text-6xl">
+    <span data-i18n="hero.title1">Creating</span> <span class="glow-text" data-i18n="hero.title2">Extraordinary Experiences</span>
+  </h1>
+  <p class="mt-5 max-w-2xl text-base text-slate-300 sm:text-lg" data-i18n="hero.sub">From concept and 3D design to build, print and live event crews, NMR Events delivers exhibitions, interiors and events across Saudi Arabia.</p>
+  <div class="mt-8 flex flex-wrap gap-3">
+    <a href="/booth" class="btn-primary" data-i18n="hero.cta1">Explore the 3D booth</a>
+    <a href="/compliance" class="btn-ghost" data-i18n="hero.cta2">Check event compliance</a>
+  </div>
+  <dl class="mt-14 grid max-w-3xl grid-cols-3 gap-3 sm:gap-6">
+    <% [['10', 'stat.years', 'Years of experience'], ['100', 'stat.projects', 'Successful projects'], ['20', 'stat.clients', 'Corporate clients']].forEach(function (s) { %>
+      <div class="card text-center !p-4 sm:!p-6">
+        <dd class="glow-text text-3xl font-black sm:text-5xl" data-count="<%= s[0] %>">+<%= s[0] %></dd>
+        <dt class="mt-1 text-xs text-slate-400 sm:text-sm" data-i18n="<%= s[1] %>"><%= s[2] %></dt>
+      </div>
+    <% }) %>
+  </dl>
+</section>
+
+<section id="services" class="container-x scroll-mt-20 py-12">
+  <h2 class="h-section" data-i18n="services.title">What we do</h2>
+  <p class="mt-2 max-w-2xl text-slate-400" data-i18n="services.sub">Four connected services, one accountable team.</p>
+  <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <% [
+      ['graphic', 'Graphic Design & Motion Graphics', 'Brand identity, key visuals, presentations and motion graphics for screens and launches.', 'M4 20l4-1 11-11a2.1 2.1 0 00-3-3L5 16l-1 4z'],
+      ['d3', '3D Design: Exhibitions & Interior', 'Booth, stage and interior design with CAD drawings and CNC-ready files for fabrication.', 'M12 2l9 5v10l-9 5-9-5V7l9-5zm0 0v20M3 7l9 5 9-5'],
+      ['print', 'Printing & Advertising', 'Large-format print, signage, wraps and outdoor advertising, produced and installed.', 'M6 9V3h12v6M6 18H4v-7h16v7h-2M7 14h10v7H7z'],
+      ['event', 'Event Management & Execution', 'Full event delivery with trained event crew: ushering, safety, first aid and zone supervision.', 'M8 2v4M16 2v4M3 9h18M5 5h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z']
+    ].forEach(function (s) { %>
+      <article class="card transition hover:-translate-y-1 hover:shadow-glow-purple">
+        <svg class="h-9 w-9 text-flame-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="<%= s[3] %>"/></svg>
+        <h3 class="mt-4 text-lg font-bold text-white" data-i18n="s.<%= s[0] %>.t"><%= s[1] %></h3>
+        <p class="mt-2 text-sm text-slate-400" data-i18n="s.<%= s[0] %>.d"><%= s[2] %></p>
+        <% if (s[0] === 'd3') { %><p class="mt-3 flex gap-2"><span class="tag bg-royal-600/30 text-royal-400">CAD</span><span class="tag bg-flame-500/20 text-flame-400">CNC</span></p><% } %>
+      </article>
+    <% }) %>
+  </div>
+</section>
+
+<section class="container-x py-12">
+  <h2 class="h-section" data-i18n="mod.title">Digital tools for your event</h2>
+  <div class="mt-8 grid gap-4 sm:grid-cols-2">
+    <% [['/booth', 'mod.booth', '3D Booth Viewer', 'Rotate, inspect and relight a corporate booth or stage in your browser.'],
+        ['/compliance', 'mod.compliance', 'Compliance Engine', 'Capacity, exits, fire safety and the SECA / GEA / Civil Defense permit checklist.'],
+        ['/crowd', 'mod.crowd', 'Crowd Management', 'Staffing hierarchy and live capacity monitoring for indoor and outdoor sites.'],
+        ['/register', 'mod.crew', 'Crew Registration & QR Badge', 'Register, verify by email code and receive a verifiable QR employee badge.']].forEach(function (m) { %>
+      <a href="<%= m[0] %>" class="card group flex flex-col gap-1 transition hover:border-flame-400/60 hover:shadow-glow">
+        <h3 class="text-lg font-bold text-white" data-i18n="<%= m[1] %>.t"><%= m[2] %></h3>
+        <p class="text-sm text-slate-400" data-i18n="<%= m[1] %>.d"><%= m[3] %></p>
+        <span class="mt-2 text-sm font-semibold text-gold-400 group-hover:underline" data-i18n="common.open">Open →</span>
+      </a>
+    <% }) %>
+  </div>
+</section>
+
+<section id="portfolio" class="container-x scroll-mt-20 py-12">
+  <h2 class="h-section" data-i18n="pf.title">Selected work</h2>
+  <div id="pf-filters" class="mt-5 flex flex-wrap gap-2" role="group" aria-label="Portfolio filter">
+    <% [['all', 'pf.all', 'All'], ['exhibition', 'cat.exhibition', 'Exhibitions'], ['event', 'cat.event', 'Events'], ['interior', 'cat.interior', 'Interior'], ['branding', 'cat.branding', 'Branding']].forEach(function (c, i) { %>
+      <button type="button" class="chip" data-cat="<%= c[0] %>" aria-pressed="<%= i === 0 %>" data-i18n="<%= c[1] %>"><%= c[2] %></button>
+    <% }) %>
+  </div>
+  <div id="pf-grid" class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" aria-live="polite"></div>
+  <p class="mt-4 text-xs text-slate-500" data-i18n="pf.note">Sample entries. Replace them with your real portfolio.</p>
+</section>
+
+<section class="container-x py-12">
+  <div class="card flex flex-col items-start justify-between gap-4 bg-gradient-to-r from-royal-700/40 to-flame-600/30 sm:flex-row sm:items-center">
+    <div>
+      <h2 class="text-xl font-bold text-white sm:text-2xl" data-i18n="cta.title">Join the NMR event crew</h2>
+      <p class="mt-1 text-sm text-slate-300" data-i18n="cta.sub">Register, verify your email and get your QR badge.</p>
+    </div>
+    <a href="/register" class="btn-primary shrink-0" data-i18n="nav.register">Join the crew</a>
+  </div>
+</section>
+
+<%- include('partials/foot') %>
+<script src="/js/home.js"></script>
+</body></html>

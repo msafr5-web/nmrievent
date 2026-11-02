@@ -1,0 +1,30 @@
+<%- include('partials/head', { title: title, path: path }) %>
+<section class="container-x max-w-md py-10 sm:py-14">
+  <article class="card overflow-hidden !p-0 shadow-glow-purple">
+    <div class="bg-gradient-to-r from-royal-700 to-flame-600 px-6 py-5">
+      <p class="text-xs font-bold uppercase tracking-[0.25em] text-white/80">NMR Events</p>
+      <p class="text-sm text-white/90" data-i18n="b.title">Official crew badge</p>
+    </div>
+    <div class="space-y-5 p-6">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <h1 class="text-2xl font-black text-white"><%= p.fullName %></h1>
+          <p class="mt-1 text-sm text-slate-400"><%= p.email %></p>
+        </div>
+        <span class="tag shrink-0 <%= p.verified ? 'bg-emerald-500/15 text-emerald-300' : 'bg-red-500/15 text-red-300' %>" data-i18n="<%= p.verified ? 'b.verified' : 'b.unverified' %>"><%= p.verified ? 'Verified' : 'Unverified' %></span>
+      </div>
+      <% if (p.qrCodeUrl) { %><img src="<%= p.qrCodeUrl %>" alt="QR code for this badge" width="240" height="240" class="mx-auto h-60 w-60 rounded-xl bg-white p-2"><% } %>
+      <dl class="space-y-4 text-sm">
+        <div><dt class="label" data-i18n="b.id">Tracking ID</dt><dd class="break-all font-mono text-base text-gold-300"><%= p.uniqueId %></dd></div>
+        <% if (p.dob) { %><div><dt class="label" data-i18n="r.dob">Date of birth</dt><dd class="text-slate-200"><%= p.dob %></dd></div><% } %>
+        <div><dt class="label" data-i18n="r.exp">Experience</dt><dd class="whitespace-pre-line text-slate-200"><%= p.experience %></dd></div>
+        <div><dt class="label" data-i18n="r.bio">Short bio</dt><dd class="whitespace-pre-line text-slate-200"><%= p.bio %></dd></div>
+        <div><dt class="label" data-i18n="b.issued">Verified on</dt><dd class="text-slate-200"><time datetime="<%= p.verifiedAt.toISOString() %>"><%= p.verifiedAt.toLocaleString('en-GB', { timeZone: 'Asia/Riyadh', dateStyle: 'medium', timeStyle: 'short' }) %></time></dd></div>
+      </dl>
+      <% if (mode === 'minimal') { %><p class="text-xs text-slate-500" data-i18n="b.privacy">Contact details are partly hidden to protect the holder's privacy.</p><% } %>
+    </div>
+  </article>
+  <button type="button" data-print class="btn-ghost mt-5 w-full print:hidden" data-i18n="b.print">Print badge</button>
+</section>
+<%- include('partials/foot') %>
+</body></html>

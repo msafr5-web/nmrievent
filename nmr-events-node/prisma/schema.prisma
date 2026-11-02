@@ -1,0 +1,85 @@
+// NMR Events data model.
+// Names follow the brief (Employee, EventProject, CrowdStaff). Fields marked "added" are
+// small additions needed by the OTP flow and the live capacity monitor.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum VenueType {
+  INDOOR
+  OUTDOOR
+}
+
+enum ComplianceStatus {
+  PENDING
+  COMPLIANT
+  CONDITIONAL
+  NON_COMPLIANT
+}
+
+enum StaffStatus {
+  PLANNED
+  ACTIVE
+  ON_BREAK
+  OFF_DUTY
+}
+
+model Employee {
+  id               String        @id @default(uuid())
+  fullName         String
+  dob              DateTime      @db.Date
+  email            String        @unique
+  bio              String
+  experience       String
+  verified         Boolean       @default(false)
+  uniqueTrackingId String?       @unique
+  clientIp         String?
+  qrCodeUrl        String?
+  createdAt        DateTime      @default(now())
+  verifiedAt       DateTime? // added
+  otp              OtpChallenge? // added
+
+  @@index([verified])
+}
+
+// added: one pending OTP per employee. Only a bcrypt hash of the code is stored.
+model OtpChallenge {
+  id         String   @id @default(uuid())
+  employeeId String   @unique
+  employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  codeHash   String
+  attempts   Int      @default(0)
+  expiresAt  DateTime
+  sentAt     DateTime @default(now())
+}
+
+model EventProject {
+  id               String           @id @default(uuid())
+  clientName       String
+  spaceArea        Float // square metres
+  duration         Int // days
+  venueType        VenueType
+  complianceStatus ComplianceStatus @default(PENDING)
+  createdAt        DateTime         @default(now())
+  eventType        String           @default("exhibition") // added
+  capacity         Int              @default(0) // added: planned maximum occupancy
+  currentOccupancy Int              @default(0) // added: live head count
+  staff            CrowdStaff[]
+}
+
+model CrowdStaff {
+  id              String        @id @default(uuid())
+  role            String
+  zone            String
+  status          StaffStatus   @default(PLANNED)
+  assignedEventId String?
+  assignedEvent   EventProject? @relation(fields: [assignedEventId], references: [id], onDelete: SetNull)
+
+  @@index([assignedEventId])
+}

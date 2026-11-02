@@ -1,0 +1,59 @@
+<%- include('partials/head', { title: title, path: path }) %>
+<section class="container-x py-10 sm:py-14">
+  <h1 class="h-section" data-i18n="booth.title">Interactive 3D booth viewer</h1>
+  <p class="mt-2 max-w-2xl text-slate-400" data-i18n="booth.sub">Drag to rotate, scroll to zoom, right-drag to pan. Change the lighting, materials and colour to inspect the design.</p>
+
+  <div class="mt-8 grid gap-5 lg:grid-cols-[1fr_320px]">
+    <div class="card relative overflow-hidden !p-0">
+      <div id="stage" class="aspect-[4/3] w-full touch-none bg-ink-900 sm:aspect-[16/10]" role="img" aria-label="3D model of the selected booth"></div>
+      <p id="nowebgl" class="absolute inset-0 hidden place-items-center p-6 text-center text-slate-300" data-i18n="booth.nowebgl">Your browser or device could not start WebGL, so the 3D view is unavailable.</p>
+      <p class="pointer-events-none absolute bottom-3 start-4 text-xs text-slate-400" data-i18n="booth.hint">Drag · Scroll · Right-drag</p>
+    </div>
+
+    <aside class="card space-y-5" aria-label="Controls">
+      <div>
+        <label class="label" for="model" data-i18n="booth.model">Model</label>
+        <select id="model" class="input"></select>
+        <p id="deliverables" class="mt-2 text-xs text-slate-400"></p>
+      </div>
+      <fieldset>
+        <legend class="label" data-i18n="booth.light">Lighting</legend>
+        <div class="flex flex-wrap gap-2" data-group="light">
+          <button type="button" class="chip" data-v="studio" aria-pressed="true" data-i18n="light.studio">Studio</button>
+          <button type="button" class="chip" data-v="spot" aria-pressed="false" data-i18n="light.spot">Spotlights</button>
+          <button type="button" class="chip" data-v="neon" aria-pressed="false" data-i18n="light.neon">Neon</button>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend class="label" data-i18n="booth.material">Material</legend>
+        <div class="flex flex-wrap gap-2" data-group="material">
+          <button type="button" class="chip" data-v="matte" aria-pressed="true" data-i18n="mat.matte">Matte</button>
+          <button type="button" class="chip" data-v="gloss" aria-pressed="false" data-i18n="mat.gloss">Gloss</button>
+          <button type="button" class="chip" data-v="metal" aria-pressed="false" data-i18n="mat.metal">Metal</button>
+          <button type="button" class="chip" data-v="wood" aria-pressed="false" data-i18n="mat.wood">Wood</button>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend class="label" data-i18n="booth.color">Brand colour</legend>
+        <div class="flex flex-wrap gap-2" data-group="color">
+          <% ['#f59e0b', '#f97316', '#a855f7', '#22d3ee', '#ef4444', '#ffffff'].forEach(function (c, i) { %>
+            <button type="button" data-v="<%= c %>" aria-pressed="<%= i === 0 %>" aria-label="<%= c %>" class="h-9 w-9 rounded-full border-2 border-white/20 aria-pressed:border-white aria-pressed:ring-2 aria-pressed:ring-white/60" style="background:<%= c %>"></button>
+          <% }) %>
+        </div>
+      </fieldset>
+      <div class="flex flex-wrap gap-2">
+        <button type="button" id="t-rotate" class="chip" aria-pressed="false" data-i18n="booth.rotate">Auto-rotate</button>
+        <button type="button" id="t-wire" class="chip" aria-pressed="false" data-i18n="booth.wire">Wireframe</button>
+        <button type="button" id="t-screen" class="chip" aria-pressed="true" data-i18n="booth.screen">LED screen</button>
+        <button type="button" id="t-reset" class="chip" data-i18n="booth.reset">Reset view</button>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<%- include('partials/foot') %>
+<script type="importmap" nonce="<%= nonce %>">
+{ "imports": { "three": "/vendor/three/three.module.js", "three/addons/": "/vendor/three-addons/" } }
+</script>
+<script type="module" src="/js/booth.js"></script>
+</body></html>

@@ -1,0 +1,45 @@
+<%- include('partials/head', { title: title, path: path }) %>
+<section class="container-x py-10 sm:py-14">
+  <h1 class="h-section" data-i18n="c.title">Saudi compliance engine</h1>
+  <p class="mt-2 max-w-3xl text-slate-400" data-i18n="c.sub">Pre-check an event against capacity, exits, fire safety and the SECA / GEA / Civil Defense permit checklist.</p>
+
+  <div class="mt-8 grid gap-5 lg:grid-cols-[340px_1fr]">
+    <form id="calc-form" class="card space-y-4 self-start" novalidate>
+      <div class="grid grid-cols-2 gap-3">
+        <div><label class="label" for="area" data-i18n="c.area">Area (m²)</label><input id="area" name="area" type="number" min="10" step="any" inputmode="decimal" class="input" value="1200" required></div>
+        <div><label class="label" for="crowd" data-i18n="c.crowd">Expected crowd</label><input id="crowd" name="crowd" type="number" min="1" step="1" inputmode="numeric" class="input" value="500" required></div>
+      </div>
+      <div>
+        <label class="label" for="venueType" data-i18n="c.venue">Site profile</label>
+        <select id="venueType" name="venueType" class="input">
+          <option value="INDOOR" data-i18n="venue.INDOOR">Indoor venue</option>
+          <option value="OUTDOOR" data-i18n="venue.OUTDOOR">Outdoor open space</option>
+        </select>
+      </div>
+      <div>
+        <label class="label" for="eventType" data-i18n="c.event">Event type</label>
+        <select id="eventType" name="eventType" class="input">
+          <option value="exhibition" data-i18n="ev.exhibition">Exhibition</option>
+          <option value="conference" data-i18n="ev.conference">Conference</option>
+          <option value="corporate" data-i18n="ev.corporate">Corporate event</option>
+          <option value="entertainment" data-i18n="ev.entertainment">Entertainment</option>
+        </select>
+      </div>
+      <div>
+        <label class="label" for="density"><span data-i18n="c.density">Density</span>: <output id="density-out">2.0</output> m²/<span data-i18n="c.person">person</span></label>
+        <input id="density" name="density" type="range" min="1.5" max="2.5" step="0.1" value="2" class="w-full accent-orange-500">
+        <div class="flex justify-between text-[11px] text-slate-500"><span>1.5</span><span>2.5</span></div>
+      </div>
+      <div><label class="label" for="duration" data-i18n="c.duration">Duration (days)</label><input id="duration" name="duration" type="number" min="1" max="365" value="3" class="input"></div>
+      <p id="form-err" class="err" role="alert"></p>
+      <button class="btn-primary w-full" type="submit" data-i18n="c.calc">Calculate</button>
+    </form>
+
+    <div id="result" class="space-y-5" aria-live="polite">
+      <p class="card text-slate-400" data-i18n="c.empty">Enter the event size and press Calculate.</p>
+    </div>
+  </div>
+</section>
+<%- include('partials/foot') %>
+<script src="/js/compliance.js"></script>
+</body></html>

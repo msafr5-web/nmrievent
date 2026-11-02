@@ -1,0 +1,43 @@
+name: nmr-events-node
+
+on:
+  push:
+    paths: ['nmr-events-node/**', '.github/workflows/nmr-events-node.yml']
+  pull_request:
+    paths: ['nmr-events-node/**', '.github/workflows/nmr-events-node.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: nmr-events-node
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: nmr
+          POSTGRES_PASSWORD: nmr
+          POSTGRES_DB: nmr_events
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U nmr" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgresql://nmr:nmr@localhost:5432/nmr_events?schema=public
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: nmr-events-node/package-lock.json
+      - run: npm ci
+      - run: npx prisma migrate deploy
+      - run: npm test
+      - name: Tailwind output is up to date
+        run: |
+          npm run build:css
+          git diff --exit-code -- public/css/app.css

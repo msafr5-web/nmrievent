@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %> · NMR Events</title>
+  <meta name="description" content="NMR Events: exhibitions, interior design, printing and event management in Saudi Arabia.">
+  <meta name="theme-color" content="#07030f">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/app.css">
+  <script src="/js/lang-init.js"></script>
+</head>
+<body class="min-h-screen bg-hero-glow bg-no-repeat">
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-50 focus:rounded-lg focus:bg-gold-400 focus:px-3 focus:py-2 focus:text-ink-950" data-i18n="nav.skip">Skip to content</a>
+  <header class="sticky top-0 z-40 border-b border-white/10 bg-ink-950/80 backdrop-blur">
+    <div class="container-x flex h-16 items-center justify-between gap-3">
+      <a href="/" class="flex items-center gap-2" aria-label="NMR Events">
+        <span class="grid h-9 w-9 place-items-center rounded-xl bg-brand-gradient text-sm font-black text-ink-950 shadow-glow">N</span>
+        <span class="text-base font-extrabold tracking-wide text-white">NMR <span class="glow-text">EVENTS</span></span>
+      </a>
+      <nav id="nav" class="hidden items-center gap-1 text-sm lg:flex" aria-label="Main">
+        <% [['/', 'nav.home', 'Home'], ['/#services', 'nav.services', 'Services'], ['/#portfolio', 'nav.portfolio', 'Portfolio'], ['/booth', 'nav.booth', '3D Booth'], ['/compliance', 'nav.compliance', 'Compliance'], ['/crowd', 'nav.crowd', 'Crowd'], ['/register', 'nav.register', 'Join the crew']].forEach(function (l) { %>
+          <a href="<%= l[0] %>" class="rounded-lg px-3 py-2 text-slate-300 transition hover:bg-white/10 hover:text-white<%= path === l[0] ? ' bg-white/10 text-white' : '' %>" data-i18n="<%= l[1] %>"><%= l[2] %></a>
+        <% }) %>
+      </nav>
+      <div class="flex items-center gap-2">
+        <button id="lang-toggle" type="button" class="btn-ghost !min-h-9 !px-3 !py-1.5 text-xs" aria-label="Switch language">العربية</button>
+        <button id="menu-toggle" type="button" class="btn-ghost !min-h-9 !px-3 !py-1.5 lg:hidden" aria-expanded="false" aria-controls="nav" aria-label="Menu">☰</button>
+      </div>
+    </div>
+  </header>
+  <main id="main">

@@ -1,0 +1,56 @@
+<%- include('partials/head', { title: title, path: path }) %>
+<section class="container-x py-10 sm:py-14">
+  <h1 class="h-section" data-i18n="cr.title">Crowd management</h1>
+  <p class="mt-2 max-w-3xl text-slate-400" data-i18n="cr.sub">Plan the on-site organisation and watch capacity live.</p>
+
+  <div class="mt-8 grid gap-5 lg:grid-cols-[340px_1fr]">
+    <form id="plan-form" class="card space-y-4 self-start" novalidate>
+      <h2 class="text-lg font-bold text-white" data-i18n="cr.plan">Staffing planner</h2>
+      <div class="grid grid-cols-2 gap-3">
+        <div><label class="label" for="p-area" data-i18n="c.area">Area (m²)</label><input id="p-area" type="number" min="10" step="any" class="input" value="1200"></div>
+        <div><label class="label" for="p-crowd" data-i18n="c.crowd">Expected crowd</label><input id="p-crowd" type="number" min="1" class="input" value="800"></div>
+      </div>
+      <div>
+        <label class="label" for="p-venue" data-i18n="c.venue">Site profile</label>
+        <select id="p-venue" class="input"><option value="INDOOR" data-i18n="venue.INDOOR">Indoor venue</option><option value="OUTDOOR" data-i18n="venue.OUTDOOR">Outdoor open space</option></select>
+      </div>
+      <p id="plan-err" class="err" role="alert"></p>
+      <button class="btn-primary w-full" type="submit" data-i18n="cr.build">Build hierarchy</button>
+    </form>
+    <div id="plan-out" class="card" aria-live="polite"><p class="text-slate-400" data-i18n="cr.empty">Build a hierarchy to see the staffing tree.</p></div>
+  </div>
+
+  <div class="mt-10 card" id="monitor">
+    <div class="flex flex-wrap items-end justify-between gap-3">
+      <div>
+        <h2 class="text-lg font-bold text-white" data-i18n="cr.monitor">Live capacity monitor</h2>
+        <p class="text-sm text-slate-400" data-i18n="cr.monitor.sub">Operators only. Refreshes every 3 seconds.</p>
+      </div>
+      <form id="key-form" class="flex items-end gap-2" novalidate>
+        <div><label class="label" for="key" data-i18n="cr.key">Operator key</label><input id="key" type="password" autocomplete="off" class="input" placeholder="x-admin-key"></div>
+        <button class="btn-ghost" type="submit" data-i18n="cr.connect">Connect</button>
+      </form>
+    </div>
+    <p id="mon-err" class="err" role="alert"></p>
+    <div id="mon-body" class="mt-5 hidden">
+      <label class="label" for="ev" data-i18n="cr.select">Event</label>
+      <select id="ev" class="input max-w-md"></select>
+      <div class="mt-6 grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+        <div>
+          <div class="flex items-baseline gap-3"><span id="occ" class="text-5xl font-black text-white">0</span><span class="text-slate-400">/ <span id="cap">0</span></span><span id="lvl" class="tag"></span></div>
+          <div class="mt-3 h-3 overflow-hidden rounded-full bg-white/10"><div id="bar" class="h-full rounded-full bg-emerald-400 transition-all" style="width:0%"></div></div>
+          <p id="staff" class="mt-3 text-sm text-slate-400"></p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button type="button" class="btn-ghost" data-d="-10">−10</button>
+          <button type="button" class="btn-ghost" data-d="-1">−1</button>
+          <button type="button" class="btn-primary" data-d="1">+1</button>
+          <button type="button" class="btn-primary" data-d="10">+10</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<%- include('partials/foot') %>
+<script src="/js/crowd.js"></script>
+</body></html>
