@@ -45,6 +45,7 @@ export function Footer() {
           <p>© {new Date().getFullYear()} nmrievent. جميع الحقوق محفوظة.</p>
           <div className="flex gap-5">
             <Link href="/privacy" className="hover:text-gold">سياسة الخصوصية</Link>
+            <Link href="/app" className="hover:text-gold">التطبيق وملف التعريف</Link>
             <span>البيانات مستضافة داخل المملكة وفق نظام حماية البيانات الشخصية</span>
           </div>
         </div>

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans_Arabic, Reem_Kufi } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { PwaRegister } from "@/components/PwaRegister";
 import { themeScript } from "@/components/ThemeToggle";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { site } from "@/content/site";
@@ -36,6 +37,10 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image", images: ["/og.jpg"] },
   alternates: { canonical: "/" },
+  applicationName: "NMR Events",
+  icons: { icon: "/icons/icon-192.png", apple: "/icons/apple-touch-icon.png" },
+  appleWebApp: { capable: true, title: "NMR Events", statusBarStyle: "black-translucent" },
+  formatDetection: { telephone: false },
 };
 
 export const viewport: Viewport = {
@@ -68,6 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <Footer />
         <WhatsAppFab />
+        <PwaRegister />
       </body>
     </html>
   );

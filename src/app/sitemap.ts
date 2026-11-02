@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/contact",
     "/rfq",
     "/privacy",
+    "/app",
     ...services.map((s) => `/services/${s.slug}`),
     ...projects.map((p) => `/portfolio/${p.slug}`),
     ...insights.map((i) => `/insights/${i.slug}`),
