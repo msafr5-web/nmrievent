@@ -1,0 +1,5 @@
+node_modules
+.env
+public/qrcodes/*
+!public/qrcodes/.gitkeep
+npm-debug.log*
