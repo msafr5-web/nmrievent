@@ -17,7 +17,7 @@ export function Footer() {
           <h2 className="mb-4 text-sm font-semibold text-fg">الموقع</h2>
           <ul className="space-y-3 text-sm text-muted">
             {nav.map((n) => (
-              <li key={n.href}><Link className="hover:text-gold" href={n.href}>{n.label}</Link></li>
+              <li key={n.href}><Link className="hover:text-brand" href={n.href}>{n.label}</Link></li>
             ))}
           </ul>
         </div>
@@ -25,17 +25,17 @@ export function Footer() {
           <h2 className="mb-4 text-sm font-semibold text-fg">الخدمات</h2>
           <ul className="space-y-3 text-sm text-muted">
             {services.map((s) => (
-              <li key={s.slug}><Link className="hover:text-gold" href={`/services/${s.slug}`}>{s.title}</Link></li>
+              <li key={s.slug}><Link className="hover:text-brand" href={`/services/${s.slug}`}>{s.title}</Link></li>
             ))}
           </ul>
         </div>
         <div className="md:col-span-3">
           <h2 className="mb-4 text-sm font-semibold text-fg">تواصل معنا</h2>
           <ul className="space-y-3 text-sm text-muted">
-            <li className="flex items-center gap-2"><PinIcon className="h-4 w-4 text-gold" />{site.city}</li>
-            <li className="flex items-center gap-2"><MailIcon className="h-4 w-4 text-gold" /><a href={`mailto:${site.email}`} className="hover:text-gold">{site.email}</a></li>
+            <li className="flex items-center gap-2"><PinIcon className="h-4 w-4 text-brand" />{site.city}</li>
+            <li className="flex items-center gap-2"><MailIcon className="h-4 w-4 text-brand" /><a href={`mailto:${site.email}`} className="hover:text-brand">{site.email}</a></li>
             {phones.map((ph) => (
-              <li key={ph.tel} className="flex items-center gap-2"><PhoneIcon className="h-4 w-4 text-gold" /><a href={`tel:${ph.tel}`} dir="ltr" className="hover:text-gold">{ph.display}</a></li>
+              <li key={ph.tel} className="flex items-center gap-2"><PhoneIcon className="h-4 w-4 text-brand" /><a href={`tel:${ph.tel}`} dir="ltr" className="hover:text-brand">{ph.display}</a></li>
             ))}
           </ul>
         </div>
@@ -44,8 +44,8 @@ export function Footer() {
         <div className="container flex flex-col items-center justify-between gap-3 py-6 text-xs text-muted sm:flex-row">
           <p>© {new Date().getFullYear()} nmrievent. جميع الحقوق محفوظة.</p>
           <div className="flex gap-5">
-            <Link href="/privacy" className="hover:text-gold">سياسة الخصوصية</Link>
-            <Link href="/app" className="hover:text-gold">التطبيق وملف التعريف</Link>
+            <Link href="/privacy" className="hover:text-brand">سياسة الخصوصية</Link>
+            <Link href="/app" className="hover:text-brand">التطبيق وملف التعريف</Link>
             <span>البيانات مستضافة داخل المملكة وفق نظام حماية البيانات الشخصية</span>
           </div>
         </div>

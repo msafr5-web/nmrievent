@@ -24,9 +24,9 @@ export function ProjectCard({ project, large = false }: { project: Project; larg
           <span>{project.sector}</span>
           <span dir="ltr">{project.year}</span>
         </div>
-        <h3 className="mt-3 text-xl font-bold transition group-hover:text-gold">{project.title}</h3>
+        <h3 className="mt-3 text-xl font-bold transition group-hover:text-brand">{project.title}</h3>
         <p className="mt-2 line-clamp-2 text-sm leading-7 text-muted">{project.summary}</p>
-        <p className="mt-4 text-sm"><span className="text-gold">{project.attendees}</span> <span className="text-muted">حاضر</span></p>
+        <p className="mt-4 text-sm"><span className="text-brand">{project.attendees}</span> <span className="text-muted">حاضر</span></p>
       </div>
     </Link>
   );

@@ -14,7 +14,7 @@ export function ProjectCover({ palette, seed, className = "" }: { palette: [stri
       <defs>
         <linearGradient id={`${id}-bg`} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor={palette[0]} />
-          <stop offset="1" stopColor="#0A0C10" />
+          <stop offset="1" stopColor="#070B3F" />
         </linearGradient>
         <radialGradient id={`${id}-glow`} cx={cx / 400} cy={cy / 260} r=".6">
           <stop offset="0" stopColor={palette[1]} stopOpacity=".75" />
@@ -30,7 +30,7 @@ export function ProjectCover({ palette, seed, className = "" }: { palette: [stri
       {rings.map((r, i) => (
         <circle key={r} cx={cx} cy={cy} r={r} fill="none" stroke={palette[1]} strokeOpacity={0.35 - i * 0.05} strokeWidth="1" />
       ))}
-      <path d={`M0 ${200 + (h % 30)} Q 100 ${170 + (h % 40)} 200 ${195} T 400 ${185 + (h % 25)} V260 H0z`} fill="#0A0C10" opacity=".55" />
+      <path d={`M0 ${200 + (h % 30)} Q 100 ${170 + (h % 40)} 200 ${195} T 400 ${185 + (h % 25)} V260 H0z`} fill="#070B3F" opacity=".55" />
     </svg>
   );
 }

@@ -17,10 +17,10 @@ export default function InsightsPage() {
     <>
       <PageHero eyebrow="رؤى وأفكار" title="من قلب صناعة الفعاليات السعودية" lead="اتجاهات السوق، أفضل الممارسات التشغيلية، والتقنيات التي تعيد تشكيل تجربة الحضور." />
       <section className="container">
-        <Link href={`/insights/${lead.slug}`} className="card group grid gap-8 p-8 transition hover:border-gold/60 md:grid-cols-2 md:p-12">
+        <Link href={`/insights/${lead.slug}`} className="card group grid gap-8 p-8 transition hover:border-brand/60 md:grid-cols-2 md:p-12">
           <div>
-            <span className="text-xs font-semibold text-gold">{lead.category} · مقال مميز</span>
-            <h2 className="mt-4 text-3xl font-bold leading-snug group-hover:text-gold md:text-4xl">{lead.title}</h2>
+            <span className="text-xs font-semibold text-brand">{lead.category} · مقال مميز</span>
+            <h2 className="mt-4 text-3xl font-bold leading-snug group-hover:text-brand md:text-4xl">{lead.title}</h2>
           </div>
           <div>
             <p className="text-lg leading-8 text-muted">{lead.excerpt}</p>
@@ -29,9 +29,9 @@ export default function InsightsPage() {
         </Link>
         <div className="mt-6 grid gap-6 md:grid-cols-2">
           {rest.map((p) => (
-            <Link key={p.slug} href={`/insights/${p.slug}`} className="card group block p-8 transition hover:border-gold/60">
-              <span className="text-xs font-semibold text-gold">{p.category}</span>
-              <h2 className="mt-4 text-2xl font-bold leading-snug group-hover:text-gold">{p.title}</h2>
+            <Link key={p.slug} href={`/insights/${p.slug}`} className="card group block p-8 transition hover:border-brand/60">
+              <span className="text-xs font-semibold text-brand">{p.category}</span>
+              <h2 className="mt-4 text-2xl font-bold leading-snug group-hover:text-brand">{p.title}</h2>
               <p className="mt-3 leading-8 text-muted">{p.excerpt}</p>
               <p className="mt-6 text-sm text-muted">{fmt(p.date)} · {p.readMinutes} دقائق قراءة</p>
             </Link>

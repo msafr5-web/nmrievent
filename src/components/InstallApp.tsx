@@ -34,7 +34,7 @@ export function InstallApp() {
   }, []);
 
   if (platform === null) return null;
-  if (platform === "installed" || done) return <p className="text-gold" role="status">✓ التطبيق مثبّت على جهازك.</p>;
+  if (platform === "installed" || done) return <p className="text-brand" role="status">✓ التطبيق مثبّت على جهازك.</p>;
 
   if (prompt) {
     return (

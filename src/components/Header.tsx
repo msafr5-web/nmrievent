@@ -39,7 +39,7 @@ export function Header() {
         scrolled || open ? "border-b border-line/70 bg-bg/85 backdrop-blur-xl" : "bg-transparent"
       }`}
     >
-      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:start-4 focus:top-4 focus:rounded-full focus:bg-gold focus:px-4 focus:py-2 focus:text-bg">
+      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:start-4 focus:top-4 focus:rounded-full focus:bg-brand focus:px-4 focus:py-2 focus:text-bg">
         تخطَّ إلى المحتوى
       </a>
       <div className="container flex h-[72px] items-center justify-between gap-4">
@@ -51,7 +51,7 @@ export function Header() {
               href={item.href}
               aria-current={isActive(item.href) ? "page" : undefined}
               className={`rounded-full px-4 py-2 text-sm transition ${
-                isActive(item.href) ? "text-gold" : "text-muted hover:text-fg"
+                isActive(item.href) ? "text-brand" : "text-muted hover:text-fg"
               }`}
             >
               {item.label}
@@ -59,8 +59,8 @@ export function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <a href={`tel:${phones[0].tel}`} dir="ltr" className="hidden items-center gap-2 rounded-full px-3 py-2 text-sm text-muted transition hover:text-gold xl:inline-flex" aria-label={`اتصل بنا على ${phones[0].display}`}>
-            <PhoneIcon className="h-4 w-4 text-gold" />{phones[0].display}
+          <a href={`tel:${phones[0].tel}`} dir="ltr" className="hidden items-center gap-2 rounded-full px-3 py-2 text-sm text-muted transition hover:text-brand xl:inline-flex" aria-label={`اتصل بنا على ${phones[0].display}`}>
+            <PhoneIcon className="h-4 w-4 text-brand" />{phones[0].display}
           </a>
           <ThemeToggle />
           <Link href="/rfq" className="btn-primary hidden sm:inline-flex">
@@ -87,7 +87,7 @@ export function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className={`rounded-2xl px-4 py-4 font-display text-2xl ${isActive(item.href) ? "text-gold" : "text-fg"}`}
+              className={`rounded-2xl px-4 py-4 font-display text-2xl ${isActive(item.href) ? "text-brand" : "text-fg"}`}
             >
               {item.label}
             </Link>
@@ -98,7 +98,7 @@ export function Header() {
           <div className="mt-4 grid gap-2">
             {phones.map((ph) => (
               <a key={ph.tel} href={`tel:${ph.tel}`} dir="ltr" className="btn-ghost justify-center py-3 text-base">
-                <PhoneIcon className="h-5 w-5 text-gold" />{ph.display}
+                <PhoneIcon className="h-5 w-5 text-brand" />{ph.display}
               </a>
             ))}
           </div>

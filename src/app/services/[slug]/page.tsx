@@ -37,11 +37,11 @@ export default async function ServicePage({ params }: Props) {
       </PageHero>
       <section className="container grid gap-6 md:grid-cols-2">
         <div className="card p-8">
-          <span className="grid h-14 w-14 place-items-center rounded-2xl bg-gold/10 text-gold"><Icon className="h-7 w-7" /></span>
+          <span className="grid h-14 w-14 place-items-center rounded-2xl bg-brand/10 text-brand"><Icon className="h-7 w-7" /></span>
           <h2 className="mt-6 text-2xl font-bold">ما الذي نقدمه</h2>
           <ul className="mt-6 space-y-4">
             {service.capabilities.map((c) => (
-              <li key={c} className="flex items-start gap-3 text-lg"><CheckIcon className="mt-1.5 h-5 w-5 shrink-0 text-gold" />{c}</li>
+              <li key={c} className="flex items-start gap-3 text-lg"><CheckIcon className="mt-1.5 h-5 w-5 shrink-0 text-brand" />{c}</li>
             ))}
           </ul>
         </div>
@@ -50,7 +50,7 @@ export default async function ServicePage({ params }: Props) {
           <ul className="mt-6 space-y-3">
             {service.deliverables.map((d, i) => (
               <li key={d} className="flex items-center gap-4 rounded-2xl bg-elevated p-4">
-                <span className="font-display text-xl text-gold">{`0${i + 1}`}</span>{d}
+                <span className="font-display text-xl text-brand">{`0${i + 1}`}</span>{d}
               </li>
             ))}
           </ul>
@@ -60,7 +60,7 @@ export default async function ServicePage({ params }: Props) {
         <section className="container mt-24">
           <SectionHeading
             eyebrow="من أعمالنا"
-            title={<>صور من <span className="text-gold">التنفيذ</span></>}
+            title={<>صور من <span className="text-brand">التنفيذ</span></>}
             action={<Link href="/portfolio#gallery" className="btn-ghost">معرض الصور الكامل</Link>}
           />
           <WorkMosaic items={photos} columns={photos.length % 3 === 0 ? 3 : 2} />

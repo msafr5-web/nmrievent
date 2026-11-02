@@ -14,7 +14,8 @@
     "test:db": "vitest run --config vitest.db.config.mts",
     "trial": "node scripts/trial.mjs",
     "trial:leads": "node scripts/trial-leads.mjs",
-    "assets": "node scripts/make-assets.mjs"
+    "assets": "node scripts/make-assets.mjs",
+    "brand:pdf": "node scripts/make-brand-pdf.mjs"
   },
   "dependencies": {
     "next": "16.4.4",
@@ -36,6 +37,7 @@
     "eslint": "^9.35.0",
     "eslint-config-next": "16.4.4",
     "jsqr": "^1.4.0",
+    "playwright-core": "^1.64.1",
     "postcss": "^8.5.6",
     "sharp": "0.35.5",
     "tailwindcss": "^3.4.17",

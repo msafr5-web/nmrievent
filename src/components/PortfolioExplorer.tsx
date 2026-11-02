@@ -18,7 +18,7 @@ function Chips({ label, options, value, onChange }: { label: string; options: re
           aria-checked={value === o}
           onClick={() => onChange(o)}
           className={`rounded-full border px-4 py-2 text-sm transition ${
-            value === o ? "border-gold bg-gold text-bg" : "border-line text-muted hover:border-gold hover:text-fg"
+            value === o ? "border-brand bg-brand text-bg" : "border-line text-muted hover:border-brand hover:text-fg"
           }`}
         >
           {o}

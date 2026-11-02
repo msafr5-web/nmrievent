@@ -21,7 +21,7 @@ export default async function AppPage() {
 
   return (
     <>
-      <PageHero eyebrow="التطبيق" title={<>nmrievent <span className="text-gold">في جيبك</span></>} lead="ثبّت التطبيق على شاشتك الرئيسية للوصول السريع، واطلب عرض سعر أو تواصل معنا بضغطة واحدة." />
+      <PageHero eyebrow="التطبيق" title={<>nmrievent <span className="text-brand">في جيبك</span></>} lead="ثبّت التطبيق على شاشتك الرئيسية للوصول السريع، واطلب عرض سعر أو تواصل معنا بضغطة واحدة." />
       <section className="container grid gap-6 md:grid-cols-2">
         <div className="card flex flex-col p-8">
           <h2 className="text-2xl font-bold">ثبّت التطبيق</h2>
@@ -55,7 +55,7 @@ export default async function AppPage() {
             <div className="text-sm leading-7 text-muted">
               <p>امسح الرمز بكاميرا الجوال.</p>
               <p className="mt-1 text-xs" dir="ltr">{profileUrl}</p>
-              <a href="/qr/profile-qr.png" download="NMR-Profile-QR.png" className="mt-3 inline-block font-semibold text-gold hover:underline">تحميل الرمز للطباعة (PNG)</a>
+              <a href="/qr/profile-qr.png" download="NMR-Profile-QR.png" className="mt-3 inline-block font-semibold text-brand hover:underline">تحميل الرمز للطباعة (PNG)</a>
             </div>
           </div>
         </div>

@@ -35,7 +35,7 @@ export default async function ProjectPage({ params }: Props) {
     <>
       <section className="pt-28 md:pt-32">
         <div className="container">
-          <Link href="/portfolio" className="inline-flex items-center gap-2 text-sm text-muted hover:text-gold">
+          <Link href="/portfolio" className="inline-flex items-center gap-2 text-sm text-muted hover:text-brand">
             <ArrowIcon className="h-4 w-4 rotate-180" /> العودة إلى معرض الأعمال
           </Link>
           <h1 className="mt-6 max-w-4xl text-balance text-4xl font-bold leading-tight md:text-6xl">{project.title}</h1>
@@ -71,7 +71,7 @@ export default async function ProjectPage({ params }: Props) {
             <dl className="mt-6 grid gap-4 sm:grid-cols-3">
               {project.results.map((r) => (
                 <div key={r.label} className="card p-6">
-                  <dd className="font-display text-3xl font-bold text-gold">{r.value}</dd>
+                  <dd className="font-display text-3xl font-bold text-brand">{r.value}</dd>
                   <dt className="mt-2 text-sm text-muted">{r.label}</dt>
                 </div>
               ))}
@@ -83,7 +83,7 @@ export default async function ProjectPage({ params }: Props) {
               {project.services.map((slug) => {
                 const s = getService(slug);
                 return s ? (
-                  <Link key={slug} href={`/services/${slug}`} className="rounded-full border border-line px-4 py-2 text-sm hover:border-gold hover:text-gold">{s.title}</Link>
+                  <Link key={slug} href={`/services/${slug}`} className="rounded-full border border-line px-4 py-2 text-sm hover:border-brand hover:text-brand">{s.title}</Link>
                 ) : null;
               })}
             </div>

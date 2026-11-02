@@ -1,15 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
-import { logoImage } from "@/content/gallery";
 
 /**
- * شعار الشركة الرسمي (من ملف التعريف). حروفه بيضاء، فيوضع داخل لوحة كحلية
- * بلون هوية الشركة ليبقى مقروءًا في الوضعين الفاتح والداكن.
+ * شعار NMR Events الرسمي. نسختان تتبدلان مع الوضع:
+ * الملوّن (حروف بيضاء) فوق الكحلي في الداكن، ونسخة الحروف الكحلية في الفاتح.
+ * الأبعاد 722×331؛ الحد الأدنى للعرض 96px (هنا 112–122px) (انظر /brand).
  */
 export function Logo({ className = "" }: { className?: string }) {
+  const size = { width: 722, height: 331, sizes: "(min-width: 768px) 140px, 112px", className: "h-12 w-auto md:h-14" } as const;
   return (
-    <Link href="/" className={`inline-flex items-center rounded-xl bg-[#0b0f3b] px-3 py-1.5 ring-1 ring-white/10 transition hover:ring-gold/60 ${className}`} aria-label="NMR Events — الصفحة الرئيسية">
-      <Image src={logoImage.src} alt="NMR Events" width={logoImage.width} height={logoImage.height} priority sizes="96px" className="h-9 w-auto" />
+    <Link href="/" className={`inline-flex items-center rounded-lg transition hover:opacity-90 ${className}`} aria-label="NMR Events — الصفحة الرئيسية">
+      <Image src="/images/brand/nmr-logo-on-light.png" alt="NMR Events" {...size} priority className={`${size.className} dark:hidden`} />
+      <Image src="/images/brand/nmr-logo.png" alt="NMR Events" {...size} priority className={`${size.className} hidden dark:block`} />
     </Link>
   );
 }

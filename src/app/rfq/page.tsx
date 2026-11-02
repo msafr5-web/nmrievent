@@ -14,7 +14,7 @@ export default function RfqPage() {
     <>
       <PageHero
         eyebrow="مهيّئ الفعاليات الذكي"
-        title={<>صمّم فعاليتك، واحصل على <span className="text-gold">تقدير فوري</span></>}
+        title={<>صمّم فعاليتك، واحصل على <span className="text-brand">تقدير فوري</span></>}
         lead="خمس خطوات قصيرة تمنحك تقديرًا مبدئيًا للتكلفة، ويصلك عرض تفصيلي من مستشارنا خلال ساعتين."
       />
       <section className="container">

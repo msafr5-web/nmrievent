@@ -81,7 +81,7 @@ export function GalleryGrid({ items }: { items: GalleryItem[] }) {
               aria-checked={filter === id}
               onClick={() => setFilter(id as Filter)}
               className={`rounded-full border px-4 py-2 text-sm transition ${
-                filter === id ? "border-gold bg-gold text-bg" : "border-line text-muted hover:border-gold hover:text-fg"
+                filter === id ? "border-brand bg-brand text-bg" : "border-line text-muted hover:border-brand hover:text-fg"
               }`}
             >
               {label} <span className="opacity-70">({n})</span>
@@ -100,7 +100,7 @@ export function GalleryGrid({ items }: { items: GalleryItem[] }) {
               type="button"
               onClick={(e) => open(i, e.currentTarget)}
               aria-label={`تكبير الصورة: ${item.alt}`}
-              className="group relative block w-full overflow-hidden rounded-2xl border border-line bg-elevated text-start focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+              className="group relative block w-full overflow-hidden rounded-2xl border border-line bg-elevated text-start focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
             >
               <Image
                 src={item.src}
@@ -132,12 +132,12 @@ export function GalleryGrid({ items }: { items: GalleryItem[] }) {
             <span className="text-sm text-white/70" dir="ltr">
               {(active ?? 0) + 1} / {visible.length}
             </span>
-            <button ref={closeRef} type="button" onClick={close} aria-label="إغلاق" className="grid h-11 w-11 place-items-center rounded-full border border-white/30 hover:border-gold hover:text-gold">
+            <button ref={closeRef} type="button" onClick={close} aria-label="إغلاق" className="grid h-11 w-11 place-items-center rounded-full border border-white/30 hover:border-brand hover:text-brand">
               <CloseIcon className="h-5 w-5" />
             </button>
           </div>
           <div className="relative flex min-h-0 flex-1 items-center justify-center px-4 md:px-20" onClick={(e) => e.target === e.currentTarget && close()}>
-            <button type="button" onClick={() => step(-1)} aria-label="الصورة السابقة" className="absolute start-2 z-10 grid h-12 w-12 place-items-center rounded-full border border-white/30 bg-black/40 text-white hover:border-gold hover:text-gold md:start-6">
+            <button type="button" onClick={() => step(-1)} aria-label="الصورة السابقة" className="absolute start-2 z-10 grid h-12 w-12 place-items-center rounded-full border border-white/30 bg-black/40 text-white hover:border-brand hover:text-brand md:start-6">
               <ArrowIcon className="h-5 w-5 rotate-180" />
             </button>
             <Image
@@ -150,7 +150,7 @@ export function GalleryGrid({ items }: { items: GalleryItem[] }) {
               priority
               className="max-h-full w-auto max-w-full rounded-xl object-contain"
             />
-            <button type="button" onClick={() => step(1)} aria-label="الصورة التالية" className="absolute end-2 z-10 grid h-12 w-12 place-items-center rounded-full border border-white/30 bg-black/40 text-white hover:border-gold hover:text-gold md:end-6">
+            <button type="button" onClick={() => step(1)} aria-label="الصورة التالية" className="absolute end-2 z-10 grid h-12 w-12 place-items-center rounded-full border border-white/30 bg-black/40 text-white hover:border-brand hover:text-brand md:end-6">
               <ArrowIcon className="h-5 w-5" />
             </button>
           </div>

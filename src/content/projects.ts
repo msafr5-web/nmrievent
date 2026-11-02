@@ -38,7 +38,7 @@ export const projects: Project[] = [
     solution: "منصة تسجيل ذكية ببطاقات NFC، تطبيق أجندة تفاعلي، وفريق بروتوكول من 120 كادرًا.",
     results: [{ value: "98%", label: "رضا الحضور" }, { value: "12 ث", label: "متوسط زمن الدخول" }, { value: "140", label: "متحدثًا" }],
     services: ["tech", "staffing", "creative"],
-    palette: ["#1F5C4A", "#CEA85E"],
+    palette: ["#141C66", "#F05A22"],
   },
   {
     slug: "desert-lights-festival",
@@ -54,7 +54,7 @@ export const projects: Project[] = [
     solution: "نمذجة تدفق الحشود، نقل ترددي من مواقف ذكية، وغرفة عمليات بكاميرات تحليلية.",
     results: [{ value: "180K", label: "زائر" }, { value: "0", label: "حوادث جسيمة" }, { value: "-35%", label: "زمن الانتظار" }],
     services: ["crowd", "logistics", "creative"],
-    palette: ["#A65234", "#E8CF96"],
+    palette: ["#6502EA", "#F6BC80"],
   },
   {
     slug: "smart-city-expo",
@@ -70,7 +70,7 @@ export const projects: Project[] = [
     solution: "مسار تجربة قصصي من خمس محطات، هولوجرام للمتحدث الرئيسي، وتسجيل عملاء محتملين بـ QR.",
     results: [{ value: "4,300", label: "عميل محتمل" }, { value: "7 د", label: "متوسط مدة الزيارة" }, { value: "#1", label: "أفضل جناح" }],
     services: ["tech", "creative"],
-    palette: ["#0E2A47", "#6FB7C9"],
+    palette: ["#141C66", "#6502EA"],
   },
   {
     slug: "national-energy-launch",
@@ -86,7 +86,7 @@ export const projects: Project[] = [
     solution: "فريق إنتاج متوازي، عرض إسقاط ضوئي، وغرفة تنسيق بروتوكول موحدة.",
     results: [{ value: "21 يومًا", label: "من الفكرة للتنفيذ" }, { value: "80 م", label: "إسقاط ضوئي" }, { value: "100%", label: "التزام بالجدول" }],
     services: ["creative", "staffing", "logistics"],
-    palette: ["#2B2B2B", "#CEA85E"],
+    palette: ["#070B3F", "#F05A22"],
   },
   {
     slug: "brand-roadshow",
@@ -102,7 +102,7 @@ export const projects: Project[] = [
     solution: "منصة متنقلة قابلة للتركيب خلال 6 ساعات، وجدولة كوادر مركزية مع لوحة مؤشرات.",
     results: [{ value: "60K", label: "تفاعل مباشر" }, { value: "3", label: "مدن" }, { value: "+28%", label: "مبيعات الفترة" }],
     services: ["creative", "staffing", "tech"],
-    palette: ["#5B2A86", "#F2B66D"],
+    palette: ["#6502EA", "#F05A22"],
   },
   {
     slug: "gov-digital-forum",
@@ -118,7 +118,7 @@ export const projects: Project[] = [
     solution: "استوديو بث متكامل، منصة افتراضية مستضافة محليًا، وتسجيل آمن متوافق مع PDPL.",
     results: [{ value: "25K", label: "مشاهد عن بعد" }, { value: "99.9%", label: "استقرار البث" }, { value: "PDPL", label: "امتثال كامل" }],
     services: ["tech", "logistics", "staffing"],
-    palette: ["#1F5C4A", "#9FD3BE"],
+    palette: ["#141C66", "#F6BC80"],
   },
 ];
 

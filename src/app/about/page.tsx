@@ -23,7 +23,7 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="من نحن"
-        title={<>نجمع <span className="text-gold">الإبداع</span> و<span className="text-gold">التقنية</span> و<span className="text-gold">التشغيل</span> في فريق واحد</>}
+        title={<>نجمع <span className="text-brand">الإبداع</span> و<span className="text-brand">التقنية</span> و<span className="text-brand">التشغيل</span> في فريق واحد</>}
         lead="وُلدت nmrievent من قناعة بسيطة: الفعالية الاستثنائية تحتاج شريكًا يفهم الفكرة الإبداعية، ويملك التقنية، ويقدر على تشغيل مئات الآلاف من الزوار بأمان."
       />
       <section className="container mb-6 grid gap-4 md:grid-cols-2">
@@ -46,7 +46,7 @@ export default function AboutPage() {
         <dl className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {stats.map((s) => (
             <div key={s.label} className="card p-6 text-center">
-              <dd className="font-display text-4xl font-bold text-gold" dir="ltr">{s.value.toLocaleString("en-US")}{s.suffix}</dd>
+              <dd className="font-display text-4xl font-bold text-brand" dir="ltr">{s.value.toLocaleString("en-US")}{s.suffix}</dd>
               <dt className="mt-2 text-sm text-muted">{s.label}</dt>
             </div>
           ))}
@@ -57,7 +57,7 @@ export default function AboutPage() {
         <div className="mt-8 grid gap-4 md:grid-cols-4">
           {journey.map((j, i) => (
             <div key={j.key} className="rounded-3xl border border-line p-6">
-              <span className="font-display text-gold">{`0${i + 1}`}</span>
+              <span className="font-display text-brand">{`0${i + 1}`}</span>
               <h3 className="mt-3 text-xl font-bold">{j.title}</h3>
               <p className="mt-2 text-sm leading-7 text-muted">{j.text}</p>
             </div>

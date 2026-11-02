@@ -49,11 +49,11 @@ function Hero() {
         />
         {/* يضمن وضوح الترويسة فوق الصورة في الوضعين */}
         <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-bg/90 via-bg/50 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_20%,rgb(var(--gold)/.28),transparent_55%),radial-gradient(ellipse_at_10%_90%,rgb(var(--palm)/.30),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_15%,rgb(var(--violet)/.32),transparent_55%),radial-gradient(ellipse_at_10%_100%,rgb(var(--brand)/.26),transparent_50%)]" />
         <div className="sadu absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
         <svg className="absolute -end-40 top-1/2 h-[900px] w-[900px] -translate-y-1/2 animate-[spin_120s_linear_infinite] opacity-40" viewBox="0 0 400 400">
           {Array.from({ length: 12 }, (_, i) => (
-            <circle key={i} cx="200" cy="200" r={30 + i * 15} fill="none" stroke="rgb(var(--gold))" strokeOpacity={0.5 - i * 0.035} strokeDasharray={i % 2 ? "2 6" : "none"} />
+            <circle key={i} cx="200" cy="200" r={30 + i * 15} fill="none" stroke="rgb(var(--brand))" strokeOpacity={0.5 - i * 0.035} strokeDasharray={i % 2 ? "2 6" : "none"} />
           ))}
         </svg>
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-bg to-transparent" />
@@ -63,7 +63,7 @@ function Hero() {
         <div className="max-w-4xl">
           <span className="eyebrow animate-fade-up">شريكك المتكامل للفعاليات في المملكة</span>
           <h1 className="mt-6 animate-fade-up text-balance text-5xl font-bold leading-[1.1] [animation-delay:100ms] sm:text-6xl lg:text-7xl">
-            نصنع فعاليات <span className="text-gold">تليق بطموح</span> المملكة
+            نصنع فعاليات <span className="text-brand">تليق بطموح</span> المملكة
           </h1>
           <p className="mt-7 max-w-2xl animate-fade-up text-lg leading-9 text-muted [animation-delay:200ms] md:text-xl">
             إبداع فني، حلول رقمية تفاعلية، إدارة حشود ولوجستيات، وكوادر ميدانية مؤهلة. منصة واحدة تدير فعاليتك من الفكرة إلى قياس الأثر.
@@ -81,7 +81,7 @@ function Hero() {
         <div className="flex w-max animate-drift gap-12 whitespace-nowrap text-sm text-muted">
           {[...Array(2)].flatMap((_, k) =>
             ["مؤتمرات دولية", "معارض وأجنحة", "حفلات تدشين", "تفعيل علامات تجارية", "مهرجانات ومواسم", "هولوجرام وواقع معزز", "إدارة حشود", "مضيفون وكوادر"].map((t) => (
-              <span key={`${k}-${t}`} className="flex items-center gap-12">{t}<span className="text-gold">✦</span></span>
+              <span key={`${k}-${t}`} className="flex items-center gap-12">{t}<span className="text-brand">✦</span></span>
             )),
           )}
         </div>
@@ -97,7 +97,7 @@ function Stats() {
         {stats.map((s, i) => (
           <div key={s.label} className={`p-6 md:p-10 ${i % 2 ? "border-s border-line" : ""} ${i > 1 ? "border-t border-line md:border-t-0" : ""} ${i === 2 ? "md:border-s" : ""}`}>
             <dt className="text-sm text-muted">{s.label}</dt>
-            <dd className="mt-3 font-display text-4xl font-bold text-gold md:text-5xl">
+            <dd className="mt-3 font-display text-4xl font-bold text-brand md:text-5xl">
               <Counter value={s.value} decimals={s.decimals} suffix={s.suffix} />
             </dd>
           </div>
@@ -112,7 +112,7 @@ function ServicesGrid() {
     <section className="container mt-28">
       <SectionHeading
         eyebrow="خدماتنا"
-        title={<>خمس ركائز، <span className="text-gold">فريق واحد</span></>}
+        title={<>خمس ركائز، <span className="text-brand">فريق واحد</span></>}
         lead="نجمع ما تحتاجه فعاليتك تحت إدارة واحدة، فلا تنسيق بين موردين متعددين ولا فجوات في المسؤولية."
         action={<Link href="/services" className="btn-ghost">كل الخدمات <ArrowIcon className="h-4 w-4" /></Link>}
       />
@@ -121,13 +121,13 @@ function ServicesGrid() {
           const Icon = serviceIcons[s.icon];
           return (
             <Reveal key={s.slug} delay={i * 80} className={i < 2 ? "lg:col-span-3" : "lg:col-span-2"}>
-              <Link href={`/services/${s.slug}`} className="card group flex h-full flex-col p-8 transition hover:-translate-y-1 hover:border-gold/60">
-                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-gold/10 text-gold transition group-hover:bg-gold group-hover:text-bg">
+              <Link href={`/services/${s.slug}`} className="card group flex h-full flex-col p-8 transition hover:-translate-y-1 hover:border-brand/60">
+                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-brand/10 text-brand transition group-hover:bg-brand group-hover:text-bg">
                   <Icon className="h-7 w-7" />
                 </span>
                 <h3 className="mt-6 text-2xl font-bold">{s.title}</h3>
                 <p className="mt-3 flex-1 leading-8 text-muted">{s.short}</p>
-                <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-gold">
+                <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand">
                   اكتشف المزيد <ArrowIcon className="h-4 w-4 transition group-hover:-translate-x-1" />
                 </span>
               </Link>
@@ -145,15 +145,15 @@ function Journey() {
       <div className="container">
         <SectionHeading
           eyebrow="منهجيتنا"
-          title={<>رحلة الأثر: من <span className="text-gold">الفكرة</span> إلى <span className="text-gold">القياس</span></>}
+          title={<>رحلة الأثر: من <span className="text-brand">الفكرة</span> إلى <span className="text-brand">القياس</span></>}
           lead="أربع مراحل واضحة تتابعها لحظة بلحظة عبر بوابة العملاء، مع اعتمادات رقمية وتقارير في كل مرحلة."
         />
         <ol className="relative grid gap-6 md:grid-cols-4">
-          <div className="absolute inset-x-0 top-7 hidden h-px bg-gradient-to-l from-gold via-gold/40 to-transparent md:block" aria-hidden />
+          <div className="absolute inset-x-0 top-7 hidden h-px bg-gradient-to-l from-brand via-brand/40 to-transparent md:block" aria-hidden />
           {journey.map((step, i) => (
             <Reveal key={step.key} delay={i * 120}>
               <li className="relative">
-                <span className="relative grid h-14 w-14 place-items-center rounded-full border border-gold bg-bg font-display text-xl font-bold text-gold">
+                <span className="relative grid h-14 w-14 place-items-center rounded-full border border-brand bg-bg font-display text-xl font-bold text-brand">
                   {(i + 1).toLocaleString("ar-SA-u-nu-latn")}
                 </span>
                 <h3 className="mt-6 text-2xl font-bold">{step.title}</h3>
@@ -212,7 +212,7 @@ function Audiences() {
           {items.map((it, i) => (
             <Reveal key={it.title} delay={i * 100}>
               <div className="card flex gap-6 p-7">
-                <span className="font-display text-3xl font-bold text-gold/60">{`0${i + 1}`}</span>
+                <span className="font-display text-3xl font-bold text-brand/60">{`0${i + 1}`}</span>
                 <div>
                   <h3 className="text-xl font-bold">{it.title}</h3>
                   <p className="mt-2 leading-8 text-muted">{it.text}</p>
@@ -237,9 +237,9 @@ function LatestInsights() {
       <div className="grid gap-6 md:grid-cols-3">
         {insights.map((post, i) => (
           <Reveal key={post.slug} delay={i * 100}>
-            <Link href={`/insights/${post.slug}`} className="card group block h-full p-7 transition hover:border-gold/60">
-              <span className="text-xs font-semibold text-gold">{post.category}</span>
-              <h3 className="mt-4 text-xl font-bold leading-snug transition group-hover:text-gold">{post.title}</h3>
+            <Link href={`/insights/${post.slug}`} className="card group block h-full p-7 transition hover:border-brand/60">
+              <span className="text-xs font-semibold text-brand">{post.category}</span>
+              <h3 className="mt-4 text-xl font-bold leading-snug transition group-hover:text-brand">{post.title}</h3>
               <p className="mt-3 leading-7 text-muted">{post.excerpt}</p>
               <p className="mt-6 text-xs text-muted">{post.readMinutes} دقائق قراءة</p>
             </Link>
@@ -256,7 +256,7 @@ function FieldWork() {
     <section className="container mt-28">
       <SectionHeading
         eyebrow="من الميدان"
-        title={<>لقطات من <span className="text-gold">تنفيذنا</span></>}
+        title={<>لقطات من <span className="text-brand">تنفيذنا</span></>}
         lead="أجنحة معارض وفرق ميدانية وطباعة كبيرة الحجم من مشاريع نفذناها فعليًا."
         action={<Link href="/portfolio#gallery" className="btn-ghost">معرض الصور الكامل <ArrowIcon className="h-4 w-4" /></Link>}
       />

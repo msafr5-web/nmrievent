@@ -10,7 +10,7 @@ export function WorkMosaic({ items, columns = 3 }: { items: GalleryItem[]; colum
         <li key={item.id}>
           <Link
             href="/portfolio#gallery"
-            className="group relative block aspect-[4/3] overflow-hidden rounded-2xl border border-line bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+            className="group relative block aspect-[4/3] overflow-hidden rounded-2xl border border-line bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
           >
             <Image
               src={item.src}

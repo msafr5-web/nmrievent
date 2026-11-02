@@ -27,7 +27,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      className="grid h-10 w-10 place-items-center rounded-full border border-line text-muted transition hover:border-gold hover:text-gold"
+      className="grid h-10 w-10 place-items-center rounded-full border border-line text-muted transition hover:border-brand hover:text-brand"
       aria-label={dark ? "التبديل إلى الوضع الفاتح" : "التبديل إلى الوضع الداكن"}
     >
       {dark === false ? <MoonIcon className="h-5 w-5" /> : <SunIcon className="h-5 w-5" />}

@@ -153,13 +153,13 @@ export function RfqConfigurator() {
     const msg = `مرحبًا nmrievent، رقم طلبي ${done.reference}.\nنوع الفعالية: ${kindLabel}\nالحضور: ${form.guests}\nالمدينة: ${cityLabel}\nالتاريخ: ${form.date}`;
     return (
       <div className="card mx-auto max-w-2xl p-8 text-center md:p-14" role="status">
-        <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-gold text-bg"><CheckIcon className="h-8 w-8" /></span>
+        <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-brand text-bg"><CheckIcon className="h-8 w-8" /></span>
         <h2 className="mt-6 text-3xl font-bold">استلمنا طلبك بنجاح</h2>
         <p className="mt-4 leading-8 text-muted">
-          رقم الطلب <strong className="font-display text-gold" dir="ltr">{done.reference}</strong>. احتفظ به للمتابعة، وسيتواصل معك مستشار الفعاليات خلال ساعتين في أوقات العمل.
+          رقم الطلب <strong className="font-display text-brand" dir="ltr">{done.reference}</strong>. احتفظ به للمتابعة، وسيتواصل معك مستشار الفعاليات خلال ساعتين في أوقات العمل.
         </p>
         <p className="mt-6 rounded-2xl bg-elevated p-5 text-sm">
-          التقدير المبدئي: <strong className="text-gold">{formatSAR(done.estimate.low)} – {formatSAR(done.estimate.high)}</strong>
+          التقدير المبدئي: <strong className="text-brand">{formatSAR(done.estimate.low)} – {formatSAR(done.estimate.high)}</strong>
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <a href={whatsappLink(site.whatsapp, msg)} target="_blank" rel="noopener noreferrer" className="btn bg-[#25D366] text-white hover:opacity-90">
@@ -176,7 +176,7 @@ export function RfqConfigurator() {
       <form onSubmit={submit} noValidate className="lg:col-span-8">
         <div className="sticky top-[72px] z-30 -mx-4 mb-6 border-b border-line bg-bg/90 px-4 py-3 backdrop-blur lg:hidden" aria-live="polite">
           <p className="text-xs text-muted">التقدير المبدئي</p>
-          <p className="font-display text-lg font-bold text-gold">{formatSAR(est.low)} – {formatSAR(est.high)}</p>
+          <p className="font-display text-lg font-bold text-brand">{formatSAR(est.low)} – {formatSAR(est.high)}</p>
         </div>
         <ol className="mb-8 flex gap-2" aria-label="مراحل الطلب">
           {steps.map((s, i) => (
@@ -188,7 +188,7 @@ export function RfqConfigurator() {
                 aria-current={i === step ? "step" : undefined}
                 className="w-full text-start disabled:cursor-default"
               >
-                <span className={`block h-1.5 rounded-full transition ${i <= step ? "bg-gold" : "bg-line"}`} />
+                <span className={`block h-1.5 rounded-full transition ${i <= step ? "bg-brand" : "bg-line"}`} />
                 <span className={`mt-3 hidden text-xs sm:block ${i === step ? "font-semibold text-fg" : "text-muted"}`}>{s}</span>
               </button>
             </li>
@@ -236,7 +236,7 @@ export function RfqConfigurator() {
                       step={10}
                       value={Math.min(form.guests, 20000)}
                       onChange={(e) => set("guests", Number(e.target.value))}
-                      className="flex-1 accent-[rgb(var(--gold))]"
+                      className="flex-1 accent-[rgb(var(--brand))]"
                       aria-label="عدد الحضور"
                     />
                     <input
@@ -324,9 +324,9 @@ export function RfqConfigurator() {
                 <input type="text" name="company_site" tabIndex={-1} autoComplete="off" value={form.company_site} onChange={(e) => set("company_site", e.target.value)} className="hidden" aria-hidden />
                 <div className="sm:col-span-2">
                   <label className="flex cursor-pointer items-start gap-3 text-sm leading-7">
-                    <input type="checkbox" checked={form.consent} onChange={(e) => set("consent", e.target.checked)} className="mt-1.5 h-4 w-4 accent-[rgb(var(--gold))]" aria-invalid={!!errors.consent} />
+                    <input type="checkbox" checked={form.consent} onChange={(e) => set("consent", e.target.checked)} className="mt-1.5 h-4 w-4 accent-[rgb(var(--brand))]" aria-invalid={!!errors.consent} />
                     <span>
-                      أوافق على معالجة بياناتي وفق <Link href="/privacy" className="text-gold underline">سياسة الخصوصية</Link> ونظام حماية البيانات الشخصية، ولاستلام التواصل عبر البريد وواتساب.
+                      أوافق على معالجة بياناتي وفق <Link href="/privacy" className="text-brand underline">سياسة الخصوصية</Link> ونظام حماية البيانات الشخصية، ولاستلام التواصل عبر البريد وواتساب.
                     </span>
                   </label>
                   <FieldError msg={errors.consent} />
@@ -335,7 +335,7 @@ export function RfqConfigurator() {
             )}
           </div>
 
-          {serverError && <p className="mt-6 rounded-2xl border border-clay/40 bg-clay/10 p-4 text-sm text-clay" role="alert">{serverError}</p>}
+          {serverError && <p className="mt-6 rounded-2xl border border-danger/40 bg-danger/10 p-4 text-sm text-danger" role="alert">{serverError}</p>}
 
           <div className="mt-10 flex items-center justify-between gap-3 border-t border-line pt-6">
             <button type="button" onClick={() => setStep((s) => Math.max(0, s - 1))} className={`btn-ghost ${step === 0 ? "invisible" : ""}`}>
@@ -354,7 +354,7 @@ export function RfqConfigurator() {
           <div className="relative bg-elevated p-6">
             <div className="sadu absolute inset-0 opacity-50" aria-hidden />
             <p className="relative text-sm text-muted">التقدير المبدئي لفعاليتك</p>
-            <p className="relative mt-2 font-display text-3xl font-bold text-gold">
+            <p className="relative mt-2 font-display text-3xl font-bold text-brand">
               {formatSAR(est.low)}
             </p>
             <p className="relative text-sm text-muted">إلى {formatSAR(est.high)}</p>
@@ -389,12 +389,12 @@ function Fieldset({ legend, children }: { legend: string; children: ReactNode })
 function Choice({ children, checked, onChange, name, type = "radio" }: { children: ReactNode; checked: boolean; onChange: () => void; name: string; type?: "radio" | "checkbox" }) {
   return (
     <label
-      className={`flex cursor-pointer items-center gap-3 rounded-2xl border p-4 transition has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-gold ${
-        checked ? "border-gold bg-gold/10" : "border-line hover:border-gold/50"
+      className={`flex cursor-pointer items-center gap-3 rounded-2xl border p-4 transition has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-brand ${
+        checked ? "border-brand bg-brand/10" : "border-line hover:border-brand/50"
       }`}
     >
       <input type={type} name={name} checked={checked} onChange={onChange} className="sr-only" />
-      <span className={`grid h-5 w-5 shrink-0 place-items-center border ${type === "radio" ? "rounded-full" : "rounded-md"} ${checked ? "border-gold bg-gold text-bg" : "border-line"}`}>
+      <span className={`grid h-5 w-5 shrink-0 place-items-center border ${type === "radio" ? "rounded-full" : "rounded-md"} ${checked ? "border-brand bg-brand text-bg" : "border-line"}`}>
         {checked && <CheckIcon className="h-3.5 w-3.5" strokeWidth={2.5} />}
       </span>
       <span className="flex-1">{children}</span>
@@ -426,7 +426,7 @@ function TextField({ id, label, value, onChange, error, type = "text", autoCompl
 }
 
 function FieldError({ msg, id }: { msg?: string; id?: string }) {
-  return msg ? <p id={id} className="mt-2 text-sm text-clay">{msg}</p> : null;
+  return msg ? <p id={id} className="mt-2 text-sm text-danger">{msg}</p> : null;
 }
 
 function Row({ k, v }: { k: string; v: string }) {

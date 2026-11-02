@@ -15,9 +15,10 @@ export default {
         fg: withVar("fg"),
         muted: withVar("muted"),
         line: withVar("line"),
-        gold: { DEFAULT: withVar("gold"), soft: withVar("gold-soft") },
-        palm: withVar("palm"),
-        clay: withVar("clay"),
+        brand: { DEFAULT: withVar("brand"), hover: withVar("brand-hover") },
+        violet: withVar("violet"),
+        sand: withVar("sand"),
+        danger: withVar("danger"),
       },
       fontFamily: {
         sans: ["var(--font-body)", "system-ui", "sans-serif"],

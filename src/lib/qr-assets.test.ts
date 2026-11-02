@@ -32,3 +32,35 @@ describe("أصول التطبيق وQR", () => {
     expect(sw).toMatch(/\.pdf/);
   });
 });
+
+describe("أصول الهوية البصرية", () => {
+  it("كل نسخ الشعار موجودة بأبعاد صحيحة وقناة شفافية", async () => {
+    for (const f of ["nmr-logo", "nmr-logo-on-light", "nmr-logo-white", "nmr-logo-navy"]) {
+      const m = await sharp(join(pub, "images", "brand", `${f}.png`)).metadata();
+      expect([m.width, m.height], f).toEqual([722, 331]);
+      expect(m.hasAlpha, f).toBe(true);
+    }
+    const mark = await sharp(join(pub, "images", "brand", "nmr-mark.png")).metadata();
+    expect(mark.width).toBe(722);
+    expect(mark.height).toBeLessThan(331); // بدون سطر EVENTS
+  });
+
+  it("النسخة الفاتحة بحروف كحلية والنسخة البيضاء بيضاء فعلًا", async () => {
+    const px = async (f: string) => {
+      const { data, info } = await sharp(join(pub, "images", "brand", f)).raw().toBuffer({ resolveWithObject: true });
+      const out: number[][] = [];
+      for (let i = 0; i < data.length; i += info.channels) if (data[i + 3] === 255) out.push([data[i], data[i + 1], data[i + 2]]);
+      return out;
+    };
+    const onLight = await px("nmr-logo-on-light.png");
+    expect(onLight.some(([r, g, b]) => r > 230 && g > 230 && b > 230)).toBe(false); // لا حروف بيضاء متبقية
+    expect(onLight.some(([r, g, b]) => r > 230 && g > 70 && g < 110 && b < 60)).toBe(true); // البرتقالي محفوظ
+    const white = await px("nmr-logo-white.png");
+    expect(white.every(([r, g, b]) => r === 255 && g === 255 && b === 255)).toBe(true);
+  });
+
+  it("دليل الهوية PDF موجود", () => {
+    const pdf = readFileSync(join(pub, "files", "nmr-brand-guidelines.pdf"));
+    expect(pdf.subarray(0, 5).toString()).toBe("%PDF-");
+  });
+});

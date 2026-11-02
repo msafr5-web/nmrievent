@@ -33,10 +33,10 @@ export default async function InsightPage({ params }: Props) {
     <>
       <article className="container max-w-3xl pt-32 md:pt-40">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        <Link href="/insights" className="inline-flex items-center gap-2 text-sm text-muted hover:text-gold">
+        <Link href="/insights" className="inline-flex items-center gap-2 text-sm text-muted hover:text-brand">
           <ArrowIcon className="h-4 w-4 rotate-180" /> كل المقالات
         </Link>
-        <p className="mt-8 text-sm font-semibold text-gold">{post.category}</p>
+        <p className="mt-8 text-sm font-semibold text-brand">{post.category}</p>
         <h1 className="mt-4 text-balance text-4xl font-bold leading-tight md:text-5xl">{post.title}</h1>
         <p className="mt-5 text-sm text-muted">
           {new Intl.DateTimeFormat("ar-SA-u-nu-latn", { dateStyle: "long", calendar: "gregory" }).format(new Date(post.date))} · {post.readMinutes} دقائق قراءة

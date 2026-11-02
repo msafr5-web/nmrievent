@@ -9,7 +9,7 @@ export function ClientsShowcase() {
     <section className="container mt-28" aria-labelledby="clients-title">
       <SectionHeading
         eyebrow="شركاء النجاح"
-        title={<span id="clients-title">شركاؤنا <span className="text-gold">وعملاؤنا</span></span>}
+        title={<span id="clients-title">شركاؤنا <span className="text-brand">وعملاؤنا</span></span>}
         lead="نخدم نخبة من الجهات الحكومية والشركات الكبرى في مختلف القطاعات."
       />
       <div className="grid gap-6">

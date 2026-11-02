@@ -26,12 +26,12 @@ export default function ContactPage() {
       </PageHero>
       <section className="container grid gap-6 md:grid-cols-2">
         {channels.map((c) => (
-          <a key={c.title} href={c.href} {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="card group flex items-start gap-5 p-8 transition hover:border-gold/60">
-            <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gold/10 text-gold"><c.icon className="h-7 w-7" /></span>
+          <a key={c.title} href={c.href} {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="card group flex items-start gap-5 p-8 transition hover:border-brand/60">
+            <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand"><c.icon className="h-7 w-7" /></span>
             <div>
               <h2 className="text-xl font-bold">{c.title}</h2>
               <p className={`mt-2 text-muted ${c.ltr ? "text-lg font-semibold text-fg" : ""}`} dir={c.ltr ? "ltr" : "auto"}>{c.text}</p>
-              <span className="mt-4 inline-block text-sm font-semibold text-gold">{c.cta}</span>
+              <span className="mt-4 inline-block text-sm font-semibold text-brand">{c.cta}</span>
             </div>
           </a>
         ))}
