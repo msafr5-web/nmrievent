@@ -1,6 +1,6 @@
 /**
  * يولّد ملف أسرار الإنتاج deploy/.env.production بقيم عشوائية قوية (crypto)، بصلاحيات 600.
- *   node scripts/make-secrets.mjs [عنوان_الموقع]     مثال: node scripts/make-secrets.mjs http://187.126.25.41
+ *   node scripts/make-secrets.mjs [عنوان_الموقع]     مثال: node scripts/make-secrets.mjs https://nmrevent.com
  *
  * لا يستبدل ملفًا موجودًا إلا مع --force؛ لأن كلمة سر PostgreSQL تُطبَّق عند أول إنشاء للقاعدة فقط،
  * وتغييرها لاحقًا في الملف دون تغييرها في القاعدة يكسر الاتصال.
@@ -15,7 +15,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const out = join(root, "deploy", ".env.production");
 const args = process.argv.slice(2);
 const force = args.includes("--force");
-const siteUrl = (args.find((a) => !a.startsWith("--")) ?? "http://187.126.25.41").replace(/\/$/, "");
+const siteUrl = (args.find((a) => !a.startsWith("--")) ?? "https://nmrevent.com").replace(/\/$/, "");
 
 if (existsSync(out) && !force) {
   console.error(`الملف موجود: ${out}\nلن أستبدله (قد تكسر كلمة سر القاعدة الحالية). استخدم --force فقط لإعداد جديد كليًا.`);
@@ -43,6 +43,8 @@ NEXT_PUBLIC_SITE_URL=${siteUrl}
 NEXT_PUBLIC_WHATSAPP_NUMBER=966547047635
 # نطاق لتفعيل HTTPS تلقائيًا؛ ":80" للعمل عبر IP بدون تشفير
 SITE_ADDRESS=${isHttps ? host : ":80"}
+# تحويل دائم من www إلى النطاق الأساسي (يتطلب سجل DNS لـ www)؛ القيمة الافتراضية لا تطابق أي طلب
+WWW_ADDRESS=${isHttps ? `www.${host}` : "http://www.invalid"}
 
 # ----- اختياري -----
 # وجهة تسليم الطلبات (CRM/n8n)؛ فارغ = تُحفظ في القاعدة فقط

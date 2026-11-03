@@ -10,6 +10,15 @@ REPO="${DEPLOY_REPO:-https://github.com/msafr5-web/nmrievent.git}"
 BRANCH="${DEPLOY_BRANCH:-main}"
 
 [ -f deploy/.env.production ] || node scripts/make-secrets.mjs
+
+# إن كان الموقع على نطاق (SITE_ADDRESS ليس ":80")، تأكد أن DNS يشير إلى الخادم قبل أن يحاول Caddy إصدار الشهادة
+SITE_ADDRESS="$(grep -E '^SITE_ADDRESS=' deploy/.env.production | cut -d= -f2-)"
+SERVER_IP="${HOST#*@}"
+if [ -n "$SITE_ADDRESS" ] && [ "$SITE_ADDRESS" != ":80" ] && [ "${SKIP_DNS_CHECK:-0}" != "1" ]; then
+  echo "-> فحص DNS للنطاق $SITE_ADDRESS"
+  node scripts/check-dns.mjs "$SITE_ADDRESS" "$SERVER_IP" ${WAIT_DNS:+--wait}
+fi
+
 bash scripts/push-secrets.sh
 
 ssh "$HOST" "APP_DIR='$APP_DIR' REPO='$REPO' BRANCH='$BRANCH' bash -s" <<'REMOTE'

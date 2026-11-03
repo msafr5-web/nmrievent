@@ -4,7 +4,7 @@ export const site = {
   tagline: "نصنع فعاليات تليق بطموح المملكة",
   description:
     "منصة متكاملة لتصميم وإدارة الفعاليات والمؤتمرات والمعارض في المملكة العربية السعودية: إبداع فني، حلول رقمية تفاعلية، إدارة حشود ولوجستيات، وكوادر ميدانية مؤهلة.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://nmrievent.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://nmrevent.com",
   /** رقم واتساب (دولي بدون +). الافتراضي: الرقم الأول من ملف تعريف الشركة */
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "966547047635",
   email: "info@nmrevent.com",

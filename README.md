@@ -57,20 +57,25 @@ npm run build && npm start   # نسخة الإنتاج
 
 الفهرس والنص البديل لكل صورة في `src/content/gallery.ts`؛ أضف صورة جديدة بوضع ملف WebP في المجلد المناسب وسطر في ذلك الملف.
 
-## النشر على خادم (Docker Compose)
+## النشر على خادم (Docker Compose) — النطاق nmrevent.com
 
-يعمل على أي خادم Ubuntu/Debian: التطبيق + PostgreSQL + Caddy (وكيل عكسي، HTTPS تلقائي عند ربط نطاق) + مهمة cron داخلية. القاعدة والتطبيق غير منشورين خارج شبكة Docker؛ المنفذان 80/443 فقط.
+يعمل على أي خادم Ubuntu/Debian: التطبيق + PostgreSQL + Caddy (وكيل عكسي، HTTPS تلقائي وتحويل www) + مهمة cron داخلية. القاعدة والتطبيق غير منشورين خارج شبكة Docker؛ المنفذان 80/443 فقط.
+
+**1) سجلات DNS** (لوحة النطاق، Hostinger): سجلا A لـ `@` و`www` إلى `187.126.25.41`، واحذف سجلات الركن القديمة (`2.57.91.91`) وأي سجل AAAA. **أبقِ سجلات MX وTXT (SPF)** فهي للبريد.
+
+**2) الأوامر** (Git Bash داخل المشروع):
 
 ```bash
-node scripts/make-secrets.mjs http://187.126.25.41   # يولّد deploy/.env.production بأسرار عشوائية (لا يُرفع إلى git)
+node scripts/make-secrets.mjs https://nmrevent.com   # مرة واحدة: يولّد deploy/.env.production بأسرار عشوائية (خارج git)
 bash scripts/setup-ssh-key.sh                        # مرة واحدة: يثبّت مفتاحك على الخادم (يطلب كلمة سر root مرة واحدة)
-bash scripts/deploy.sh                               # يرفع الأسرار (600) ثم يستنسخ المستودع ويبني ويشغّل ويفحص الصحة
+WAIT_DNS=1 bash scripts/deploy.sh                    # ينتظر انتشار DNS ثم يرفع الأسرار (600) ويستنسخ ويبني ويشغّل ويفحص الصحة
 ```
 
+- **حماية من فشل الشهادة:** `deploy.sh` يتحقق (`scripts/check-dns.mjs`) أن النطاق وwww يشيران إلى الخادم قبل التشغيل؛ تجاوزه بـ `SKIP_DNS_CHECK=1`.
 - **الأسرار:** `scripts/push-secrets.sh` يرفع `deploy/.env.production` إلى `/opt/nmrievent/.env` بصلاحيات 600. كلمة سر القاعدة تُطبَّق عند أول إنشاء فقط، فلا تُعد توليد الملف (`--force`) على خادم فيه بيانات.
-- **ربط نطاق:** غيّر `NEXT_PUBLIC_SITE_URL` إلى `https://نطاقك` و`SITE_ADDRESS` إلى النطاق نفسه في الملف، ووجّه سجل A إلى الخادم، ثم أعد `bash scripts/deploy.sh` (القيمة الأولى تُدمج وقت البناء). وأعد توليد رمز QR (`npm run assets https://نطاقك/profile`).
-- **عرض الطلبات:** `ssh root@IP "cd /opt/nmrievent/repo && docker compose --env-file /opt/nmrievent/.env -f deploy/docker-compose.yml exec db psql -U nmr -d nmr -c 'select reference,status,created_at,payload->>'organization' from rfq_leads order by created_at desc limit 20'"`
-- **عبر IP بدون نطاق:** يعمل الموقع على HTTP؛ الـ Service Worker (وضع التطبيق/العمل بدون إنترنت) يتطلب HTTPS فيتعطل حتى ربط النطاق.
+- **رمز QR:** `public/qr/profile-qr.png` يشير إلى `https://nmrevent.com/profile`؛ أعد توليده بـ `npm run assets https://نطاقك/profile` إن تغيّر النطاق.
+- **عرض الطلبات:** `ssh root@187.126.25.41 "cd /opt/nmrievent/repo && docker compose --env-file /opt/nmrievent/.env -f deploy/docker-compose.yml exec db psql -U nmr -d nmr -c 'select reference,status,created_at from rfq_leads order by created_at desc limit 20'"`
+- **موقع الخادم:** الخادم لدى Hostinger في أوروبا (لا داخل المملكة)، ونص سياسة الخصوصية يذكر ذلك؛ راجعه قانونيًا (نقل البيانات خارج المملكة وفق نظام حماية البيانات الشخصية) أو انقل الاستضافة داخل المملكة.
 
 ## الهوية البصرية
 

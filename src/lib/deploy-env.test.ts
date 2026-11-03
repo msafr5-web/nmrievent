@@ -25,6 +25,14 @@ describe("إعدادات النشر", () => {
     expect(new URL(example.DATABASE_URL).password).toBe(example.POSTGRES_PASSWORD);
   });
 
+  it("Caddy يخدم النطاق ويحوّل www إليه", () => {
+    const caddy = readFileSync(join(process.cwd(), "deploy", "Caddyfile"), "utf8");
+    expect(caddy).toMatch(/\{\$SITE_ADDRESS::80\}/);
+    expect(caddy).toMatch(/redir https:\/\/\{\$SITE_ADDRESS:localhost\}\{uri\} permanent/);
+    expect(example.SITE_ADDRESS).toBe("nmrevent.com");
+    expect(example.WWW_ADDRESS).toBe(`www.${example.SITE_ADDRESS}`);
+  });
+
   it("compose يشترط الأسرار ولا ينشر منفذ القاعدة", () => {
     const compose = readFileSync(join(process.cwd(), "deploy", "docker-compose.yml"), "utf8");
     expect(compose).toMatch(/CRON_SECRET: \$\{CRON_SECRET:\?/);

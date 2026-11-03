@@ -89,7 +89,7 @@ await squareIcon(512, join(root, "src", "app", "icon.png"), 0.72);
 await squareIcon(180, join(root, "src", "app", "apple-icon.png"), 0.7);
 
 // ===== رمز QR =====
-const site = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://nmrievent.com").replace(/\/$/, "");
+const site = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://nmrevent.com").replace(/\/$/, "");
 const target = process.argv[2] ?? `${site}/profile`;
 mkdirSync(join(pub, "qr"), { recursive: true });
 const opts = { errorCorrectionLevel: "Q", margin: 4, color: { dark: "#000000", light: "#ffffff" } };
