@@ -1,0 +1,9 @@
+node_modules
+.next
+.git
+.trial-db
+.env
+.env*.local
+deploy/.env.production
+coverage
+*.tsbuildinfo

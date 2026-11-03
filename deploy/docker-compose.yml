@@ -1,0 +1,81 @@
+# التشغيل:  docker compose --env-file /opt/nmrievent/.env -f deploy/docker-compose.yml up -d --build
+name: nmrievent
+
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: nmr
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      POSTGRES_DB: nmr
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nmr -d nmr"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    # لا منافذ منشورة: القاعدة داخل الشبكة الداخلية فقط
+
+  migrate:
+    image: postgres:17-alpine
+    restart: "no"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?DATABASE_URL is required}
+    volumes:
+      - ../db/migrations:/migrations:ro
+    entrypoint: ["/bin/sh", "-c", "for f in /migrations/*.sql; do echo applying $$f; psql \"$$DATABASE_URL\" -v ON_ERROR_STOP=1 -f \"$$f\"; done"]
+
+  app:
+    build:
+      context: ..
+      args:
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost}
+        NEXT_PUBLIC_WHATSAPP_NUMBER: ${NEXT_PUBLIC_WHATSAPP_NUMBER:-966547047635}
+    restart: unless-stopped
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    env_file:
+      - ${ENV_FILE:-/opt/nmrievent/.env}
+    environment:
+      NODE_ENV: production
+    expose:
+      - "3000"
+
+  web:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      app:
+        condition: service_healthy
+    environment:
+      SITE_ADDRESS: ${SITE_ADDRESS:-:80}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+  # مهمة دورية: إعادة تسليم الطلبات المعلّقة وحذف المنتهي حسب مدة الاحتفاظ (كل 15 دقيقة)
+  cron:
+    image: curlimages/curl:8.10.1
+    restart: unless-stopped
+    depends_on:
+      app:
+        condition: service_healthy
+    environment:
+      CRON_SECRET: ${CRON_SECRET:?CRON_SECRET is required}
+    entrypoint: ["/bin/sh", "-c", "while true; do sleep 900; curl -fsS -H \"Authorization: Bearer $$CRON_SECRET\" http://app:3000/api/rfq/retry || echo 'cron run failed'; done"]
+
+volumes:
+  pgdata:
+  caddy_data:
+  caddy_config:

@@ -1,0 +1,12 @@
+# SITE_ADDRESS: نطاق (مثل nmrievent.com) لتفعيل HTTPS تلقائيًا بشهادة Let's Encrypt،
+# أو ":80" للعمل عبر عنوان IP بدون تشفير قبل ربط النطاق.
+{$SITE_ADDRESS::80} {
+	encode zstd gzip
+	reverse_proxy app:3000 {
+		header_up X-Real-IP {remote_host}
+	}
+	log {
+		output stdout
+		format json
+	}
+}

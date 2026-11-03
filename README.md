@@ -57,6 +57,21 @@ npm run build && npm start   # نسخة الإنتاج
 
 الفهرس والنص البديل لكل صورة في `src/content/gallery.ts`؛ أضف صورة جديدة بوضع ملف WebP في المجلد المناسب وسطر في ذلك الملف.
 
+## النشر على خادم (Docker Compose)
+
+يعمل على أي خادم Ubuntu/Debian: التطبيق + PostgreSQL + Caddy (وكيل عكسي، HTTPS تلقائي عند ربط نطاق) + مهمة cron داخلية. القاعدة والتطبيق غير منشورين خارج شبكة Docker؛ المنفذان 80/443 فقط.
+
+```bash
+node scripts/make-secrets.mjs http://187.126.25.41   # يولّد deploy/.env.production بأسرار عشوائية (لا يُرفع إلى git)
+bash scripts/setup-ssh-key.sh                        # مرة واحدة: يثبّت مفتاحك على الخادم (يطلب كلمة سر root مرة واحدة)
+bash scripts/deploy.sh                               # يرفع الأسرار (600) ثم يستنسخ المستودع ويبني ويشغّل ويفحص الصحة
+```
+
+- **الأسرار:** `scripts/push-secrets.sh` يرفع `deploy/.env.production` إلى `/opt/nmrievent/.env` بصلاحيات 600. كلمة سر القاعدة تُطبَّق عند أول إنشاء فقط، فلا تُعد توليد الملف (`--force`) على خادم فيه بيانات.
+- **ربط نطاق:** غيّر `NEXT_PUBLIC_SITE_URL` إلى `https://نطاقك` و`SITE_ADDRESS` إلى النطاق نفسه في الملف، ووجّه سجل A إلى الخادم، ثم أعد `bash scripts/deploy.sh` (القيمة الأولى تُدمج وقت البناء). وأعد توليد رمز QR (`npm run assets https://نطاقك/profile`).
+- **عرض الطلبات:** `ssh root@IP "cd /opt/nmrievent/repo && docker compose --env-file /opt/nmrievent/.env -f deploy/docker-compose.yml exec db psql -U nmr -d nmr -c 'select reference,status,created_at,payload->>'organization' from rfq_leads order by created_at desc limit 20'"`
+- **عبر IP بدون نطاق:** يعمل الموقع على HTTP؛ الـ Service Worker (وضع التطبيق/العمل بدون إنترنت) يتطلب HTTPS فيتعطل حتى ربط النطاق.
+
 ## الهوية البصرية
 
 مستخلصة من الشعار الرسمي وملف التعريف: برتقالي النمر `#F05A22` فوق كحلي `#070B3F`، مع بنفسجي `#6502EA` ورملي `#F6BC80` للتوهجات واللمسات.

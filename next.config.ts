@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const isDev = process.env.NODE_ENV !== "production";
+// upgrade-insecure-requests يكسر الموقع إن شُغّل عبر HTTP (مثلًا على IP قبل ربط النطاق)، فلا يُضاف إلا مع عنوان https
+const isHttps = (process.env.NEXT_PUBLIC_SITE_URL ?? "").startsWith("https://");
 
 // CSP: السكربتات المضمّنة (الثيم + JSON-LD + hydration) تتطلب unsafe-inline لأن الـ nonce يُجبر الصفحات
 // على العرض الديناميكي ويُسقط SSG. بقية التوجيهات تغلق الإطارات والكائنات والمصادر الخارجية.
@@ -15,7 +17,7 @@ const csp = [
   "base-uri 'self'",
   "form-action 'self'",
   "frame-ancestors 'self'",
-  ...(isDev ? [] : ["upgrade-insecure-requests"]),
+  ...(!isDev && isHttps ? ["upgrade-insecure-requests"] : []),
 ].join("; ");
 
 const securityHeaders = [
@@ -28,6 +30,8 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Docker يبني بوضع standalone (صورة صغيرة)؛ محليًا يبقى `next start` الافتراضي
+  output: process.env.BUILD_STANDALONE === "1" ? "standalone" : undefined,
   reactStrictMode: true,
   poweredByHeader: false,
   images: { formats: ["image/avif", "image/webp"] },

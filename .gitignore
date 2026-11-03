@@ -7,3 +7,5 @@ out
 next-env.d.ts
 .DS_Store
 .trial-db
+deploy/.env.production
+.env.production
