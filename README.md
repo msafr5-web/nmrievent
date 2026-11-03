@@ -63,7 +63,7 @@ npm run build && npm start   # نسخة الإنتاج
 
 **1) سجلات DNS** (لوحة النطاق، Hostinger): سجلا A لـ `@` و`www` إلى `187.126.25.41`، واحذف سجلات الركن القديمة (`2.57.91.91`) وأي سجل AAAA. **أبقِ سجلات MX وTXT (SPF)** فهي للبريد.
 
-**2) الأوامر** (Git Bash داخل المشروع):
+**2) الأوامر** (Git Bash داخل المشروع). لعرض الموقع فورًا قبل ربط النطاق: `DEPLOY_MODE=ip bash scripts/deploy.sh` (يعمل على `http://187.126.25.41`)، ثم أعد التشغيل بدون `DEPLOY_MODE` بعد ضبط DNS:
 
 ```bash
 node scripts/make-secrets.mjs https://nmrevent.com   # مرة واحدة: يولّد deploy/.env.production بأسرار عشوائية (خارج git)

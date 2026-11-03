@@ -5,7 +5,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 HOST="${DEPLOY_HOST:-root@187.126.25.41}"
 APP_DIR="${DEPLOY_DIR:-/opt/nmrievent}"
-SRC="deploy/.env.production"
+SRC="${SECRETS_FILE:-deploy/.env.production}"
 
 [ -f "$SRC" ] || { echo "ملف الأسرار غير موجود. أنشئه أولًا:  node scripts/make-secrets.mjs"; exit 1; }
 

@@ -11,8 +11,19 @@ BRANCH="${DEPLOY_BRANCH:-main}"
 
 [ -f deploy/.env.production ] || node scripts/make-secrets.mjs
 
+# DEPLOY_MODE=ip : عرض الموقع فورًا على http://IP دون انتظار DNS (يعدّل نسخة مؤقتة من الأسرار فقط ولا يمس الملف المحلي).
+# للانتقال إلى النطاق لاحقًا شغّل السكربت بدون DEPLOY_MODE بعد ضبط DNS.
+if [ "${DEPLOY_MODE:-domain}" = "ip" ]; then
+  SERVER_IP_TMP="${HOST#*@}"
+  SECRETS_FILE="$(mktemp)"
+  trap 'rm -f "$SECRETS_FILE"' EXIT
+  sed -E "s|^NEXT_PUBLIC_SITE_URL=.*|NEXT_PUBLIC_SITE_URL=http://$SERVER_IP_TMP|; s|^SITE_ADDRESS=.*|SITE_ADDRESS=:80|; s|^WWW_ADDRESS=.*|WWW_ADDRESS=http://www.invalid|" deploy/.env.production > "$SECRETS_FILE"
+  export SECRETS_FILE SKIP_DNS_CHECK=1
+  echo "-> وضع IP: سيعمل الموقع على http://$SERVER_IP_TMP (بدون HTTPS)"
+fi
+
 # إن كان الموقع على نطاق (SITE_ADDRESS ليس ":80")، تأكد أن DNS يشير إلى الخادم قبل أن يحاول Caddy إصدار الشهادة
-SITE_ADDRESS="$(grep -E '^SITE_ADDRESS=' deploy/.env.production | cut -d= -f2-)"
+SITE_ADDRESS="$(grep -E '^SITE_ADDRESS=' "${SECRETS_FILE:-deploy/.env.production}" | cut -d= -f2-)"
 SERVER_IP="${HOST#*@}"
 if [ -n "$SITE_ADDRESS" ] && [ "$SITE_ADDRESS" != ":80" ] && [ "${SKIP_DNS_CHECK:-0}" != "1" ]; then
   echo "-> فحص DNS للنطاق $SITE_ADDRESS"
@@ -62,3 +73,4 @@ $COMPOSE logs --tail=40 app web
 exit 1
 REMOTE
 echo "✔ اكتمل النشر على $HOST"
+[ "${DEPLOY_MODE:-domain}" = "ip" ] && echo "   افتح: http://${HOST#*@}"
