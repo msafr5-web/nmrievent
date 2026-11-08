@@ -3,7 +3,7 @@
  * - صفحات التنقل: Network First مع الرجوع إلى نسخة مخزنة ثم صفحة /offline
  * - لا يُخزَّن أبدًا: /api/* والـ PDF والطلبات غير GET
  */
-const VERSION = "v1";
+const VERSION = "v2";
 const STATIC = `nmr-static-${VERSION}`;
 const PAGES = `nmr-pages-${VERSION}`;
 const OFFLINE_URL = "/offline";
@@ -39,13 +39,14 @@ self.addEventListener("fetch", (event) => {
   if (request.method !== "GET") return;
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
-  if (url.pathname.startsWith("/api/") || url.pathname.endsWith(".pdf") || url.pathname === "/profile") return;
+  if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/admin") || url.pathname.startsWith("/media/") || url.pathname.endsWith(".pdf") || url.pathname === "/profile") return;
 
   if (request.mode === "navigate") {
     event.respondWith(
       fetch(request)
         .then((res) => {
-          if (res.ok) {
+          // لا نخزّن ردودًا تطلب no-store أو private (صفحات خاصة)
+          if (res.ok && !/no-store|private/i.test(res.headers.get("cache-control") || "")) {
             const copy = res.clone();
             caches.open(PAGES).then((c) => c.put(request, copy)).then(() => trim(PAGES, MAX_PAGES));
           }

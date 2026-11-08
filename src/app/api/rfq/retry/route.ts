@@ -3,7 +3,10 @@ import { NextResponse } from "next/server";
 import { parseServerEnv } from "@/lib/env";
 import { logger } from "@/lib/logger";
 import { getLeadRepository, getWebhook } from "@/server/rfq/container";
+import { purgeRejectedApplications } from "@/server/admin/applications";
+import { deleteCvFile } from "@/server/admin/media";
 import { retryPending } from "@/server/rfq/submit-lead";
+import { getPool } from "@/server/db";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -32,7 +35,11 @@ async function handle(req: Request) {
     // إعادة التسليم تتطلب webhook؛ أما حذف المنتهي بحسب سياسة الاحتفاظ فيعمل دائمًا
     const retried = webhook ? await retryPending(repo, webhook) : { claimed: 0, delivered: 0, failed: 0 };
     const purged = await repo.purgeOlderThan(env.RFQ_RETENTION_DAYS);
-    const result = { ...retried, purged };
+    // طلبات التقديم المرفوضة تُحذف بعد APPLICATION_RETENTION_DAYS مع سيرها الذاتية (سياسة الاحتفاظ)
+    const pool = getPool(env.DATABASE_URL);
+    const apps = pool ? await purgeRejectedApplications(pool, env.APPLICATION_RETENTION_DAYS) : { deleted: 0, attachments: [] as string[] };
+    for (const rel of apps.attachments) await deleteCvFile(env.UPLOAD_DIR, rel);
+    const result = { ...retried, purged, applicationsPurged: apps.deleted };
     logger.info(result, "rfq cron run");
     return NextResponse.json(result, { headers: { "Cache-Control": "no-store" } });
   } catch (err) {

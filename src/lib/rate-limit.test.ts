@@ -20,3 +20,21 @@ describe("createRateLimiter", () => {
     expect(l.size()).toBe(1);
   });
 });
+
+describe("peek / hit (عدّ الإخفاقات فقط)", () => {
+  it("peek لا يزيد العدّاد، وhit يزيده، ويُحظر بعد تجاوز الحد", () => {
+    let t = 0;
+    const l = createRateLimiter({ limit: 2, windowMs: 1000, now: () => t });
+    for (let i = 0; i < 10; i++) expect(l.peek("ip")).toBe(false); // الفحص وحده لا يستهلك الحصة
+    l.hit("ip");
+    l.hit("ip");
+    expect(l.peek("ip")).toBe(false); // عند الحد بالضبط لا يزال مسموحًا
+    l.hit("ip");
+    expect(l.peek("ip")).toBe(true);
+    expect(l.peek("other")).toBe(false);
+    t = 1001;
+    expect(l.peek("ip")).toBe(false); // انتهت النافذة
+    l.hit("ip");
+    expect(l.peek("ip")).toBe(false);
+  });
+});

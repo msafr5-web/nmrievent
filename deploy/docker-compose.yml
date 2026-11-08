@@ -47,6 +47,8 @@ services:
       NODE_ENV: production
     expose:
       - "3000"
+    volumes:
+      - appdata:/data
 
   web:
     image: caddy:2-alpine
@@ -78,5 +80,6 @@ services:
 
 volumes:
   pgdata:
+  appdata:
   caddy_data:
   caddy_config:

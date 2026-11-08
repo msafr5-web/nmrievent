@@ -109,6 +109,7 @@ export function GalleryGrid({ items }: { items: GalleryItem[] }) {
                 height={item.height}
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 loading={i < 6 ? "eager" : "lazy"}
+                unoptimized={item.src.startsWith("/media/")}
                 className="h-auto w-full transition duration-500 group-hover:scale-[1.03]"
               />
               <span className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-black/80 to-transparent p-4 text-sm leading-6 text-white transition duration-300 group-hover:translate-y-0 group-focus-visible:translate-y-0">
@@ -147,6 +148,7 @@ export function GalleryGrid({ items }: { items: GalleryItem[] }) {
               width={current.width}
               height={current.height}
               sizes="100vw"
+              unoptimized={current.src.startsWith("/media/")}
               priority
               className="max-h-full w-auto max-w-full rounded-xl object-contain"
             />

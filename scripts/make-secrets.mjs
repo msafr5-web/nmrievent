@@ -46,6 +46,15 @@ SITE_ADDRESS=${isHttps ? host : ":80"}
 # تحويل دائم من www إلى النطاق الأساسي (يتطلب سجل DNS لـ www)؛ القيمة الافتراضية لا تطابق أي طلب
 WWW_ADDRESS=${isHttps ? `www.${host}` : "http://www.invalid"}
 
+# ----- لوحة التحكم -----
+SUPER_ADMIN_EMAIL=msafr.5@gmail.com
+# رمز لمرة واحدة لإنشاء حساب المدير الأعلى من /admin/setup؛ يبقى بلا فائدة بعد إنشاء الحساب
+ADMIN_BOOTSTRAP_TOKEN=${hex(24)}
+# مجلد الصور المرفوعة والسير الذاتية (وحدة تخزين دائمة)
+UPLOAD_DIR=/data
+ADMIN_SESSION_HOURS=12
+APPLICATION_RETENTION_DAYS=365
+
 # ----- اختياري -----
 # وجهة تسليم الطلبات (CRM/n8n)؛ فارغ = تُحفظ في القاعدة فقط
 RFQ_WEBHOOK_URL=

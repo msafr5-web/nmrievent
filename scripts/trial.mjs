@@ -40,6 +40,10 @@ const app = spawn(process.execPath, [nextBin, "dev"], {
     ...process.env,
     DATABASE_URL: url,
     CRON_SECRET: process.env.CRON_SECRET ?? "trial-cron-secret-0000",
+    SUPER_ADMIN_EMAIL: process.env.SUPER_ADMIN_EMAIL ?? "msafr.5@gmail.com",
+    // رمز إعداد تجريبي محلي فقط: افتح http://localhost:3000/admin/setup
+    ADMIN_BOOTSTRAP_TOKEN: process.env.ADMIN_BOOTSTRAP_TOKEN ?? "trial-bootstrap-token-0123456789",
+    UPLOAD_DIR: process.env.UPLOAD_DIR ?? join(root, ".trial-data"),
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   },
 });

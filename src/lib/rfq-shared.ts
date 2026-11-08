@@ -20,11 +20,11 @@ export const venueLabels: Record<VenueStatus, string> = {
 // 32 رمزًا بلا حروف ملتبسة (0/O و1/I) فيكون التوزيع منتظمًا مع `b % 32`
 const REF_ALPHABET = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
 
-export function referenceNumber(date = new Date()) {
+export function referenceNumber(date = new Date(), prefix = "NMR") {
   const y = date.getFullYear().toString().slice(2);
   const bytes = globalThis.crypto.getRandomValues(new Uint8Array(6));
   const rand = Array.from(bytes, (b) => REF_ALPHABET[b % 32]).join("");
-  return `NMR-${y}-${rand}`;
+  return `${prefix}-${y}-${rand}`;
 }
 
 export function whatsappLink(number: string, text: string) {

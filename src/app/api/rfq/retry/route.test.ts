@@ -36,7 +36,7 @@ describe("GET /api/rfq/retry", () => {
     const repo = { claimPending: vi.fn(), purgeOlderThan: vi.fn().mockResolvedValue(3) };
     const m = await load({ CRON_SECRET: SECRET, RFQ_RETENTION_DAYS: "90" }, repo);
     const res = await m.GET(req(`Bearer ${SECRET}`));
-    expect(await res.json()).toEqual({ claimed: 0, delivered: 0, failed: 0, purged: 3 });
+    expect(await res.json()).toEqual({ claimed: 0, delivered: 0, failed: 0, purged: 3, applicationsPurged: 0 });
     expect(repo.claimPending).not.toHaveBeenCalled();
     expect(repo.purgeOlderThan).toHaveBeenCalledWith(90);
   });
@@ -46,7 +46,7 @@ describe("GET /api/rfq/retry", () => {
     const m = await load({ CRON_SECRET: SECRET, RFQ_WEBHOOK_URL: "https://h.test" }, repo);
     const res = await m.GET(req(`Bearer ${SECRET}`));
     expect(res.status).toBe(200);
-    expect(await res.json()).toEqual({ claimed: 0, delivered: 0, failed: 0, purged: 0 });
+    expect(await res.json()).toEqual({ claimed: 0, delivered: 0, failed: 0, purged: 0, applicationsPurged: 0 });
     expect(repo.purgeOlderThan).toHaveBeenCalledWith(180);
   });
 });

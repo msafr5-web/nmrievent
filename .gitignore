@@ -9,3 +9,5 @@ next-env.d.ts
 .trial-db
 deploy/.env.production
 .env.production
+.trial-data
+data

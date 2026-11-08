@@ -17,6 +17,7 @@ export function WorkMosaic({ items, columns = 3 }: { items: GalleryItem[]; colum
               alt={item.alt}
               fill
               sizes={columns === 3 ? "(min-width: 768px) 33vw, 50vw" : "(min-width: 768px) 50vw, 50vw"}
+              unoptimized={item.src.startsWith("/media/")}
               className="object-cover transition duration-500 group-hover:scale-105"
             />
             <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent p-3 text-xs leading-5 text-white opacity-0 transition duration-300 group-hover:opacity-100 group-focus-visible:opacity-100 md:text-sm">

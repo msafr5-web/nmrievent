@@ -30,6 +30,19 @@ export function createRateLimiter({ limit, windowMs, now = Date.now, maxKeys = 5
       entry.count += 1;
       return entry.count > limit;
     },
+    /** هل المفتاح محظور الآن؟ (فحص بلا زيادة العدّاد) */
+    peek(key: string): boolean {
+      const entry = hits.get(key);
+      return !!entry && entry.reset > now() && entry.count > limit;
+    },
+    /** يسجّل محاولة (تُستخدم لعدّ الإخفاقات فقط) */
+    hit(key: string): void {
+      const t = now();
+      if (hits.size >= maxKeys) sweep(t);
+      const entry = hits.get(key);
+      if (!entry || entry.reset <= t) hits.set(key, { count: 1, reset: t + windowMs });
+      else entry.count += 1;
+    },
     size: () => hits.size,
   };
 }

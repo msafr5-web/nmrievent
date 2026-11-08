@@ -46,6 +46,9 @@ export function Footer() {
           <div className="flex gap-5">
             <Link href="/privacy" className="hover:text-brand">سياسة الخصوصية</Link>
             <Link href="/app" className="hover:text-brand">التطبيق وملف التعريف</Link>
+            <Link href="/careers" className="hover:text-brand">انضم لفريقنا</Link>
+            <Link href="/exhibition-apply" className="hover:text-brand">المشاركة في المعارض</Link>
+            <Link href="/application-status" className="hover:text-brand">متابعة طلب</Link>
             <span>نلتزم بحماية بياناتك الشخصية</span>
           </div>
         </div>
